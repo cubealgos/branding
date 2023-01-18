@@ -1,0 +1,49 @@
+{
+  "locks": {
+    "0x5baf31f7ccf3b043b5a9c3b5c51cae8a8dc11027": {
+      "network": 137,
+      "name": "Monthly",
+      "recurringPayments": "forever",
+      "captcha": false,
+      "password": false,
+      "promo": false,
+      "emailRequired": false,
+      "maxRecipients": null,
+      "dataBuilder": "",
+      "skipRecipient": false
+    },
+    "0xcfa5bebd8527ba6aa2ecd74c45df4a738708f6d9": {
+      "network": 137,
+      "name": "Yearly",
+      "recurringPayments": "forever",
+      "captcha": false,
+      "password": false,
+      "promo": false,
+      "emailRequired": false,
+      "maxRecipients": null,
+      "dataBuilder": "",
+      "skipRecipient": false
+    },
+    "0x070d88539a3f2a1b7f7f4b81710eb61ce05aa01e": {
+      "network": 137,
+      "name": "Lifetime",
+      "captcha": false,
+      "password": false,
+      "promo": false,
+      "emailRequired": false,
+      "maxRecipients": null,
+      "dataBuilder": "",
+      "skipRecipient": false,
+      "recurringPayments": "forever"
+    }
+  },
+  "pessimistic": true,
+  "skipRecipient": true,
+  "title": "CubeAlgos",
+  "icon": "",
+  "persistentCheckout": true,
+  "referrer": "0x9F3962270A9a5dE6f4A27802BD870b443C1841c7",
+  "messageToSign": "",
+  "hideSoldOut": false,
+  "redirectUri": "https://scheeren.dev/"
+}
