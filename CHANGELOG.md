@@ -18,6 +18,10 @@ All notable changes to this repository are documented here, in the
 - Verification CI on GitHub-hosted runners: `build`, `contrast`, `licence-check`, `branch-lint`,
   `lint-history` and `changelog-check` workflows, the Node scripts behind them in `tool/`, the
   commit baseline (the 2023 commit) and the licence exceptions file (#7).
+- `chamfer` tokens (`sm` 6px, `md` 9px, `lg` 16px) emitted as `--chamfer-*`, with the clip-path pattern
+  and a focus-ring pattern that survives `clip-path` documented in the README (#22).
+- `focus` colour role (the amber-family text colour), checked as a 3:1 boundary on bg and card in both
+  themes; the chamfer focus-ring pattern uses it with a 2px gap (#22).
 - Logo masters (chamfer mark, outlined `cubealgos` wordmark, horizontal and stacked lockups) with
   `ink`, `paper`, `ink-on-paper`, `ink-on-amber` and `paper-on-ink` colourways, PNG exports at 128 to 1024 px,
   `docs/logo.md` (clear space, minimum size, misuse), the Onest ExtraBold source and OFL text, and

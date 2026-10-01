@@ -9,7 +9,7 @@ with `git checkout legacy-2023`.
 | Path | What |
 | --- | --- |
 | `assets/` | Brand assets (logo, wordmark, mascot, favicons, stings, animations); all rights reserved, see `assets/LICENSE.md` |
-| `tokens/` | DTCG source tokens: `color`, `typography`, `spacing`, `radius`, `motion` (`*.json`, Apache-2.0; JSON cannot hold a header, so each file's root carries `$extensions["com.cubealgos.license"]`) |
+| `tokens/` | DTCG source tokens: `color`, `typography`, `spacing`, `radius`, `chamfer`, `motion` (`*.json`, Apache-2.0; JSON cannot hold a header, so each file's root carries `$extensions["com.cubealgos.license"]`) |
 | `scripts/` | Node scripts (`validate-tokens.mjs`, `build.mjs`, `check-fresh.mjs`, `contrast-check.mjs`) |
 | `fonts/onest/` | Onest ExtraBold source for the outlined wordmark, with its OFL text (build input, not a brand asset) |
 | `docs/` | `logo.md` (logo files, clear space, misuse), `contrast.md` (generated contrast table), `licence-exceptions.toml` (recorded licence exceptions, empty) |
@@ -22,6 +22,41 @@ with `git checkout legacy-2023`.
 | `CHANGELOG.md` | Keep a Changelog |
 
 Guidelines arrive with a later milestone.
+
+## Chamfer
+
+Corners are cut, not rounded. The top-right and bottom-left corners are cut (as in the mark), the
+other two stay square. Sizes: `--chamfer-sm` (6px, inline controls and tags), `--chamfer-md` (9px,
+buttons and inputs), `--chamfer-lg` (16px, cards and panels). Set `--c` to one of them:
+
+```css
+.chamfered {
+  --c: var(--chamfer-md);
+  clip-path: polygon(0 0, calc(100% - var(--c)) 0, 100% var(--c), 100% 100%, var(--c) 100%, 0 calc(100% - var(--c)));
+}
+```
+
+**Focus ring:** `clip-path` clips everything outside the element's shape, including `outline`,
+`box-shadow` and `border` outside the box, so `outline` on a chamfered element is invisible
+(verified in Chrome). Put the ring on a wrapper as a `drop-shadow` filter, which follows the
+clipped silhouette on all edges and both cut corners. Use a 3px ring in `--color-focus` (the amber-family text colour, checked at 3:1 against bg and card in both themes), 2px off the element, and switch the native outline off (verified in Chrome, both themes, on an amber button):
+
+```css
+.chamfer-focus { display: inline-block; }
+.chamfer-focus :focus-visible { outline: none; } /* the native outline is clipped into a stray rectangle */
+.chamfer-focus:has(:focus-visible) {
+  filter:
+    /* 2px gap in the page colour, so the ring never merges with an amber fill */
+    drop-shadow(2px 0 0 var(--color-bg)) drop-shadow(-2px 0 0 var(--color-bg))
+    drop-shadow(0 2px 0 var(--color-bg)) drop-shadow(0 -2px 0 var(--color-bg))
+    /* the 3px ring */
+    drop-shadow(3px 0 0 var(--color-focus)) drop-shadow(-3px 0 0 var(--color-focus))
+    drop-shadow(0 3px 0 var(--color-focus)) drop-shadow(0 -3px 0 var(--color-focus));
+}
+```
+
+(`<span class="chamfer-focus"><button class="chamfered">...</button></span>`; the wrapper itself is
+not clipped. A single `drop-shadow(0 0 0 ...)` draws nothing; the four offsets make a hard ring.)
 
 ## Build
 

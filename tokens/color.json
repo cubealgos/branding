@@ -30,7 +30,8 @@
         "rule": { "$value": "{color.primitive.grid}", "$description": "Hairline, decoration." },
         "accent-fill": { "$value": "{color.primitive.amber}", "$description": "AMBER RULE: a fill and decoration colour only; never text or UI boundaries on the light ground (2.5:1 on paper). Text on it is on-accent." },
         "accent-text": { "$value": "{color.primitive.signal-text}", "$description": "Amber-family text on paper (4.7:1)." },
-        "on-accent": { "$value": "{color.primitive.ink}", "$description": "ON-AMBER RULE: text and the logo mark on an amber fill are ink (about 6.1:1). White on amber (accent-on-amber) is decoration only." }
+        "on-accent": { "$value": "{color.primitive.ink}", "$description": "ON-AMBER RULE: text and the logo mark on an amber fill are ink (about 6.1:1). White on amber (accent-on-amber) is decoration only." },
+        "focus": { "$value": "{color.theme.light.accent-text}", "$description": "Focus ring colour: the amber-family text colour, a 3:1 boundary on bg and card (checked). Drawn outside the element, so its contrast is against the page, never against an amber fill." }
       },
       "dark": {
         "bg": { "$value": "{color.primitive.ink}" },
@@ -40,7 +41,8 @@
         "rule": { "$value": "{color.primitive.rule-dark}", "$description": "Hairline, decoration." },
         "accent-fill": { "$value": "{color.primitive.amber}", "$description": "AMBER RULE: a fill and decoration colour. Amber is 6.1:1 on ink, but text uses accent-text, and on the light ground amber is never text or a boundary. Text on it is on-accent." },
         "accent-text": { "$value": "{color.primitive.accent-text-dark}" },
-        "on-accent": { "$value": "{color.primitive.ink}", "$description": "ON-AMBER RULE: text and the logo mark on an amber fill are ink (about 6.1:1). White on amber (accent-on-amber) is decoration only." }
+        "on-accent": { "$value": "{color.primitive.ink}", "$description": "ON-AMBER RULE: text and the logo mark on an amber fill are ink (about 6.1:1). White on amber (accent-on-amber) is decoration only." },
+        "focus": { "$value": "{color.theme.dark.accent-text}", "$description": "Focus ring colour: the amber-family text colour, a 3:1 boundary on bg and card (checked). Drawn outside the element, so its contrast is against the page, never against an amber fill." }
       }
     }
   }
