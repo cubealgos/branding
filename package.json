@@ -19,7 +19,8 @@
     "check:changelog": "node tool/changelog-check.mjs",
     "check:licence": "node tool/licence-check.mjs",
     "build:assets": "node scripts/build-assets.mjs",
-    "build:logo": "node scripts/build-assets.mjs logo"
+    "build:logo": "node scripts/build-assets.mjs logo",
+    "build:icons": "node scripts/build-assets.mjs icons"
   },
   "devDependencies": {
     "opentype.js": "2.0.0",
