@@ -1,7 +1,7 @@
 # Cube Algos branding
 
 The Cube Algos brand: design tokens, logo, mascot, motion and guidelines. This repository is being
-rebuilt (see the open issues); the 2023 files below are replaced as the new brand lands.
+rebuilt (see the open issues); the remaining 2023 files are replaced as the new brand lands.
 
 ## Licence
 
