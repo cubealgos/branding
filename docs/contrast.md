@@ -24,6 +24,10 @@ decoration has no threshold and is listed so the exemption stays visible.
 | `on-accent/accent-fill` | dark | text | `#16181D` | `#D9831A` | 6.10:1 | 4.5:1 | pass |
 | `fg/accent-fill` | light | text | `#16181D` | `#D9831A` | 6.10:1 | 4.5:1 | pass |
 | `fg/accent-fill` | dark | decoration | `#EDEEF1` | `#D9831A` | 2.51:1 | n/a | exempt |
+| `focus/bg` | light | boundary | `#9A5A0B` | `#EDEEF1` | 4.71:1 | 3:1 | pass |
+| `focus/bg` | dark | boundary | `#E8A452` | `#16181D` | 8.34:1 | 3:1 | pass |
+| `focus/card` | light | boundary | `#9A5A0B` | `#FBFBFC` | 5.29:1 | 3:1 | pass |
+| `focus/card` | dark | boundary | `#E8A452` | `#23262D` | 7.11:1 | 3:1 | pass |
 | `rule/bg` | light | decoration | `#CDD0D6` | `#EDEEF1` | 1.33:1 | n/a | exempt |
 | `rule/bg` | dark | decoration | `#2E323B` | `#16181D` | 1.38:1 | n/a | exempt |
 | `accent-fill/bg` | light | decoration | `#D9831A` | `#EDEEF1` | 2.51:1 | n/a | exempt |
