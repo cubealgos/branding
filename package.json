@@ -1,0 +1,14 @@
+{
+  "name": "@cubealgos/branding",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Cube Algos brand: DTCG design tokens and their build.",
+  "license": "Apache-2.0",
+  "type": "module",
+  "engines": {
+    "node": ">=24 <25"
+  },
+  "scripts": {
+    "check:tokens": "node scripts/validate-tokens.mjs"
+  }
+}
