@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-4 -6 144 90" role="img" aria-label="Swimming clownfish" class="fish fish--swimming">
+  <title>Swimming clownfish</title>
+  <defs><clipPath id="fish-clip"><path d="M54 8 H90 L110 28 V52 L90 72 H54 L36 54 V26 Z"/><path d="M60 40 L14 14 L27 40 L14 66 Z"/></clipPath></defs>
+  <g class="mover">
+    <g class="bodyg"><path class="tail" fill="#FBFBFC" d="M60 40 L14 14 L27 40 L14 66 Z"/><path class="body" fill="#FBFBFC" d="M54 8 H90 L110 28 V52 L90 72 H54 L36 54 V26 Z"/><rect class="band" x="60" y="8" width="12" height="64" fill="#E7CEB0" clip-path="url(#fish-clip)"/><rect x="82" y="28" width="7" height="16" fill="#16181D"/><rect x="95" y="28" width="7" height="16" fill="#16181D"/></g>
+  </g>
+</svg>

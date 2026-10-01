@@ -6,9 +6,10 @@ import { existsSync, readFileSync } from 'node:fs';
 import { generate as logo } from '../generate-logo.mjs';
 import { generate as icons } from '../generate-icons.mjs';
 import { generate as sting } from '../generate-sting.mjs';
+import { generate as fish } from '../generate-fish.mjs';
 import { decodePng } from './raster.mjs';
 
-export const generators = { logo, icons, sting };
+export const generators = { logo, icons, sting, fish };
 
 /**
  * Compares generated files with the committed ones; returns problem strings.
