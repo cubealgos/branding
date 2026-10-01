@@ -18,6 +18,10 @@ All notable changes to this repository are documented here, in the
 - Verification CI on GitHub-hosted runners: `build`, `contrast`, `licence-check`, `branch-lint`,
   `lint-history` and `changelog-check` workflows, the Node scripts behind them in `tool/`, the
   commit baseline (the 2023 commit) and the licence exceptions file (#7).
+- Logo masters (chamfer mark, outlined `cubealgos` wordmark, horizontal and stacked lockups) with
+  `ink`, `paper`, `ink-on-paper`, `ink-on-amber` and `paper-on-ink` colourways, PNG exports at 128 to 1024 px,
+  `docs/logo.md` (clear space, minimum size, misuse), the Onest ExtraBold source and OFL text, and
+  `npm run build:logo`; `check:fresh` now covers generated assets (#8).
 
 ### Removed
 
