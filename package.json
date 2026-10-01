@@ -22,6 +22,7 @@
     "build:logo": "node scripts/build-assets.mjs logo",
     "build:icons": "node scripts/build-assets.mjs icons",
     "build:sting": "node scripts/build-assets.mjs sting",
+    "build:fish": "node scripts/build-assets.mjs fish",
     "render:sting": "node scripts/render-sting.mjs",
     "check:sting-frames": "node scripts/check-sting-frames.mjs"
   },
