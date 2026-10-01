@@ -13,6 +13,8 @@ All notable changes to this repository are documented here, in the
   `tokens/`, and `npm run check:tokens` to validate them (#4).
 - Style Dictionary build (`npm run build`) with committed outputs in `dist/` (`css/tokens.css`,
   `json/tokens.json`, `motion/motion.json`) and `npm run check:fresh` (#5).
+- WCAG 2.2 AA contrast check for both themes (`npm run check:contrast`), the declared pairs in
+  `tokens/contrast-pairs.json`, the generated table `docs/contrast.md`, and unit tests (#6).
 
 ### Removed
 

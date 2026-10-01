@@ -1,0 +1,28 @@
+{
+  "$description": "Declared role pairs for the WCAG 2.2 AA contrast check (scripts/contrast-check.mjs). fg and bg are semantic role names (color.theme.<theme>.<role>) or full token paths. kind is text (4.5:1), large-text (3:1; at least 24 px, or 18.66 px bold), boundary (3:1) or decoration (no threshold, a visible exemption); it can be an object with a kind per theme. AMBER RULE: accent-fill (amber) as the foreground of a text or boundary pair on a paper background fails the check.",
+  "pairs": [
+    { "fg": "fg", "bg": "bg", "kind": "text" },
+    { "fg": "fg", "bg": "card", "kind": "text" },
+    { "fg": "muted", "bg": "bg", "kind": "text" },
+    { "fg": "muted", "bg": "card", "kind": "text" },
+    { "fg": "accent-text", "bg": "bg", "kind": "text" },
+    { "fg": "accent-text", "bg": "card", "kind": "text" },
+    { "fg": "on-accent", "bg": "accent-fill", "kind": "text" },
+    {
+      "fg": "fg",
+      "bg": "accent-fill",
+      "kind": { "light": "text", "dark": "decoration" },
+      "note": "In the dark theme fg is paper, which is only about 2.5:1 on amber; text on an amber fill is on-accent (ink) in both themes, so this pair is a text pair on light only."
+    },
+    { "fg": "rule", "bg": "bg", "kind": "decoration", "note": "Hairlines are decorative; any boundary that carries meaning (focus ring, input border) needs a 3:1 boundary pair of its own." },
+    { "fg": "accent-fill", "bg": "bg", "kind": "decoration", "note": "Amber on the page ground: fills and decoration only, never text or a boundary (the amber rule)." },
+    { "fg": "accent-on-amber", "bg": "accent-fill", "kind": "decoration", "note": "White on amber is the accent decoration (echo, fish body), never text." }
+  ],
+  "published": [
+    { "fg": "color.primitive.ink", "bg": "color.primitive.paper", "ratio": 15.3 },
+    { "fg": "color.primitive.muted", "bg": "color.primitive.paper", "ratio": 5.5 },
+    { "fg": "color.primitive.signal-text", "bg": "color.primitive.paper", "ratio": 4.7 },
+    { "fg": "color.primitive.amber", "bg": "color.primitive.ink", "ratio": 6.1 },
+    { "fg": "color.primitive.amber", "bg": "color.primitive.paper", "ratio": 2.5 }
+  ]
+}

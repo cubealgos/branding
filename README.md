@@ -10,7 +10,9 @@ with `git checkout legacy-2023`.
 | --- | --- |
 | `assets/` | Brand assets (logo, wordmark, mascot, favicons, stings, animations); all rights reserved, see `assets/LICENSE.md` |
 | `tokens/` | DTCG source tokens: `color`, `typography`, `spacing`, `radius`, `motion` (`*.json`, Apache-2.0; JSON cannot hold a header, so each file's root carries `$extensions["com.cubealgos.license"]`) |
-| `scripts/` | Node scripts (`validate-tokens.mjs`, `build.mjs`, `check-fresh.mjs`) |
+| `scripts/` | Node scripts (`validate-tokens.mjs`, `build.mjs`, `check-fresh.mjs`, `contrast-check.mjs`) |
+| `docs/` | `contrast.md`, the generated contrast table of the declared role pairs |
+| `test/` | Unit tests (`npm test`) |
 | `dist/` | Generated token outputs, committed: `css/tokens.css`, `json/tokens.json`, `motion/motion.json` |
 | `bin/hooks/` | Git hooks (`commit-msg`) |
 | `CLAUDE.md` | Working rules for the branch, commit and PR workflow |
@@ -27,7 +29,9 @@ disabled (`.npmrc`).
 npm ci
 npm run build          # tokens/*.json -> dist/ with Style Dictionary
 npm run check:tokens   # validate the DTCG sources (references, primitives, descriptions)
-npm run check:fresh    # rebuild into a temp dir; fail with a diff if the committed dist/ differs
+npm run check:fresh    # rebuild into a temp dir; fail with a diff if the committed dist/ or docs/contrast.md differs
+npm run check:contrast # WCAG 2.2 AA contrast of the declared pairs, both themes; writes docs/contrast.md
+npm test               # unit tests (contrast maths, the amber rule)
 ```
 
 `dist/` is generated and committed, so consumers read it on GitHub and can pin a release. Never
@@ -48,6 +52,14 @@ body { background: var(--color-bg); color: var(--color-fg); font-family: var(--f
 ```
 
 Set `data-theme="light"` or `data-theme="dark"` on `<html>` to override the visitor's system theme.
+
+### Contrast
+
+`tokens/contrast-pairs.json` declares the role pairs (`fg/bg`, `muted/card`, `on-accent/accent-fill`, ...)
+with a `kind`: `text` (4.5:1), `large-text` and `boundary` (3:1) or `decoration` (no threshold, listed so
+the exemption is visible). `npm run check:contrast` evaluates them in the light and dark themes against
+`dist/json/tokens.json`, prints the table and exits 1 on any failure. The amber rule is enforced: a
+`text` or `boundary` pair with `accent-fill` (amber) on paper always fails. Results: `docs/contrast.md`.
 
 ## Contributing
 
