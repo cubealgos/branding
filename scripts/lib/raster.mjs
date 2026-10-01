@@ -76,7 +76,10 @@ export function coverage(subs, w, h, rule = 'nonzero') {
     }
   }
   const cov = new Float32Array(w * h);
-  for (let py = 0; py < h; py++) {
+  if (edges.length === 0) return cov;
+  const y0 = Math.max(0, Math.floor(Math.min(...edges.map((e) => e.y0))));
+  const y1 = Math.min(h, Math.ceil(Math.max(...edges.map((e) => e.y1))));
+  for (let py = y0; py < y1; py++) {
     for (let k = 0; k < S; k++) {
       const ys = py + (k + 0.5) / S;
       const xs = [];
@@ -113,9 +116,10 @@ export function render(w, h, items, bg = null) {
     for (let i = 0; i < w * h; i++) acc.set([bg[0], bg[1], bg[2], 255], i * 4);
   }
   for (const it of items) {
-    const cov = coverage(flatten(it.d, it.m), w, h, it.rule);
+    const cov = coverage(it.subs ?? flatten(it.d, it.m), w, h, it.rule);
+    const alpha = it.alpha ?? 1;
     for (let i = 0; i < w * h; i++) {
-      const a = Math.min(cov[i], 1);
+      const a = Math.min(cov[i], 1) * alpha;
       if (a === 0) continue;
       const o = i * 4;
       const inv = 1 - a;
@@ -228,4 +232,60 @@ export function encodeIco(images) {
     off += bodies[i].length;
   });
   return Buffer.concat([head, ...bodies]);
+}
+
+/** Miter-join offset of a polyline vertex: the point `hw` to the left of the path at vertex i. */
+function offsetPoint(pts, i, hw, closed) {
+  const n = pts.length;
+  const prev = closed || i > 0 ? pts[(i - 1 + n) % n] : null;
+  const next = closed || i < n - 1 ? pts[(i + 1) % n] : null;
+  const dir = (a, b) => {
+    const l = Math.hypot(b[0] - a[0], b[1] - a[1]);
+    return [(b[0] - a[0]) / l, (b[1] - a[1]) / l];
+  };
+  const d0 = prev ? dir(prev, pts[i]) : dir(pts[i], next);
+  const d1 = next ? dir(pts[i], next) : d0;
+  const n0 = [-d0[1], d0[0]];
+  const n1 = [-d1[1], d1[0]];
+  const mx = n0[0] + n1[0];
+  const my = n0[1] + n1[1];
+  const k = hw / (1 + n0[0] * n1[0] + n0[1] * n1[1]); // miter: offset = (n0 + n1) * hw / (1 + n0.n1)
+  return [pts[i][0] + mx * k, pts[i][1] + my * k];
+}
+
+/** Stroke of a closed polygon (miter joins) as two rings; fill them with the evenodd rule. */
+export function strokeClosed(pts, width) {
+  const hw = width / 2;
+  return [pts.map((_, i) => offsetPoint(pts, i, hw, true)), pts.map((_, i) => offsetPoint(pts, i, -hw, true))];
+}
+
+/** Stroke of an open polyline (butt caps, miter joins) as one polygon. */
+export function strokeOpen(pts, width) {
+  const hw = width / 2;
+  const left = pts.map((_, i) => offsetPoint(pts, i, hw, false));
+  const right = pts.map((_, i) => offsetPoint(pts, i, -hw, false)).reverse();
+  return [[...left, ...right]];
+}
+
+/** The points of a closed polygon path from its start to arc length `len` (an open polyline). */
+export function trimClosed(pts, len) {
+  const out = [pts[0]];
+  let left = len;
+  for (let i = 0; i < pts.length; i++) {
+    const a = pts[i];
+    const b = pts[(i + 1) % pts.length];
+    const seg = Math.hypot(b[0] - a[0], b[1] - a[1]);
+    if (left <= seg) {
+      if (left > 1e-9) out.push([a[0] + ((b[0] - a[0]) * left) / seg, a[1] + ((b[1] - a[1]) * left) / seg]);
+      return out;
+    }
+    out.push(b);
+    left -= seg;
+  }
+  return out;
+}
+
+/** Total length of a closed polygon. */
+export function perimeter(pts) {
+  return pts.reduce((sum, a, i) => sum + Math.hypot(pts[(i + 1) % pts.length][0] - a[0], pts[(i + 1) % pts.length][1] - a[1]), 0);
 }

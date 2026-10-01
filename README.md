@@ -12,7 +12,7 @@ with `git checkout legacy-2023`.
 | `tokens/` | DTCG source tokens: `color`, `typography`, `spacing`, `radius`, `chamfer`, `motion` (`*.json`, Apache-2.0; JSON cannot hold a header, so each file's root carries `$extensions["com.cubealgos.license"]`) |
 | `scripts/` | Node scripts (`validate-tokens.mjs`, `build.mjs`, `check-fresh.mjs`, `contrast-check.mjs`) |
 | `fonts/onest/` | Onest ExtraBold source for the outlined wordmark, with its OFL text (build input, not a brand asset) |
-| `docs/` | `logo.md` (logo files, clear space, misuse), `contrast.md` (generated contrast table), `licence-exceptions.toml` (recorded licence exceptions, empty) |
+| `docs/` | `motion.md` (the logo sting: timeline, files, recipe), `logo.md` (logo files, clear space, misuse), `contrast.md` (generated contrast table), `licence-exceptions.toml` (recorded licence exceptions, empty) |
 | `tool/` | CI checks: `branch-lint`, `lint-history`, `changelog-check`, `licence-check` (`.mjs`), `commit-baseline.txt` (grandfathered SHAs) |
 | `.github/` | Verification workflows (GitHub-hosted `ubuntu-24.04`, actions pinned by SHA) and the `setup` composite action |
 | `test/` | Unit tests (`npm test`) |
@@ -71,6 +71,7 @@ npm run check:fresh    # rebuild into a temp dir; fail with a diff if the commit
 npm run check:contrast # WCAG 2.2 AA contrast of the declared pairs, both themes; writes docs/contrast.md
 npm run build:logo     # regenerate assets/logo/ (SVG colourways, PNG exports, clear-space diagram)
 npm run build:icons    # regenerate assets/favicon/ (favicon.svg/.ico, app and maskable icons, snippets)
+npm run build:sting    # the animated sting SVGs and stills; videos and GIFs: npm run render:sting (local, needs ffmpeg)
 npm test               # unit tests (contrast maths, the amber rule)
 ```
 
@@ -108,7 +109,7 @@ on GitHub-hosted runners only; verification only, nothing deploys. Run each loca
 
 | Workflow | Locally | What it fails on |
 | --- | --- | --- |
-| `build` | `npm run build && git status --short dist` and `npm run check:fresh` | a stale committed `dist/`, `docs/contrast.md` or generated asset (`assets/logo/`, `assets/favicon/`; PNGs compared by pixels) |
+| `build` | `npm run build && git status --short dist` and `npm run check:fresh` | a stale committed `dist/`, `docs/contrast.md` or generated asset (`assets/logo/`, `assets/favicon/`, `assets/sting/`; PNGs compared by pixels; rendered GIF/MP4/WebM by size, frames and duration) |
 | `contrast` | `npm run check:contrast`, `npm test` | a role pair under its WCAG 2.2 AA threshold; amber text or boundary on paper |
 | `licence-check` | `npm run check:licence` | a lockfile package (production or dev) on the deny list, not on the allow list, unknown, or MPL-2.0 without a recorded exception in `docs/licence-exceptions.toml`; exceptions are printed every run |
 | `branch-lint` | `npm run check:branch [-- <branch>]` | a branch not named `<family>/<N>-<slug>` |
