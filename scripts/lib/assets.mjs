@@ -4,9 +4,10 @@
 // check:fresh. Each generator returns Map<repo-relative path, Buffer>.
 import { existsSync, readFileSync } from 'node:fs';
 import { generate as logo } from '../generate-logo.mjs';
+import { generate as icons } from '../generate-icons.mjs';
 import { decodePng } from './raster.mjs';
 
-export const generators = { logo };
+export const generators = { logo, icons };
 
 /**
  * Compares generated files with the committed ones; returns problem strings.

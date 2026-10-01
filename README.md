@@ -70,6 +70,7 @@ npm run check:tokens   # validate the DTCG sources (references, primitives, desc
 npm run check:fresh    # rebuild into a temp dir; fail with a diff if the committed dist/ or docs/contrast.md differs
 npm run check:contrast # WCAG 2.2 AA contrast of the declared pairs, both themes; writes docs/contrast.md
 npm run build:logo     # regenerate assets/logo/ (SVG colourways, PNG exports, clear-space diagram)
+npm run build:icons    # regenerate assets/favicon/ (favicon.svg/.ico, app and maskable icons, snippets)
 npm test               # unit tests (contrast maths, the amber rule)
 ```
 
@@ -107,7 +108,7 @@ on GitHub-hosted runners only; verification only, nothing deploys. Run each loca
 
 | Workflow | Locally | What it fails on |
 | --- | --- | --- |
-| `build` | `npm run build && git status --short dist` and `npm run check:fresh` | a stale committed `dist/`, `docs/contrast.md` or generated asset (`assets/logo/`; PNGs compared by pixels) |
+| `build` | `npm run build && git status --short dist` and `npm run check:fresh` | a stale committed `dist/`, `docs/contrast.md` or generated asset (`assets/logo/`, `assets/favicon/`; PNGs compared by pixels) |
 | `contrast` | `npm run check:contrast`, `npm test` | a role pair under its WCAG 2.2 AA threshold; amber text or boundary on paper |
 | `licence-check` | `npm run check:licence` | a lockfile package (production or dev) on the deny list, not on the allow list, unknown, or MPL-2.0 without a recorded exception in `docs/licence-exceptions.toml`; exceptions are printed every run |
 | `branch-lint` | `npm run check:branch [-- <branch>]` | a branch not named `<family>/<N>-<slug>` |

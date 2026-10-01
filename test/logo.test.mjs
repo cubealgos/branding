@@ -38,3 +38,13 @@ test('png round-trip keeps pixels', () => {
   assert.equal(d.raw.length, 8 * (8 * 4 + 1));
   assert.deepEqual([...d.raw.subarray(1, 5)], [1, 2, 3, 255]);
 });
+
+test('icons: ico holds 16, 32 and 48 px images; maskable mark stays in the safe circle', async () => {
+  const { generate, MASKABLE_MARK } = await import('../scripts/generate-icons.mjs');
+  const files = generate();
+  const ico = files.get('assets/favicon/favicon.ico');
+  assert.equal(ico.readUInt16LE(4), 3);
+  assert.deepEqual([6, 22, 38].map((o) => ico[o]), [16, 32, 48]);
+  assert.ok((MASKABLE_MARK * Math.SQRT2) / 2 <= 0.4);
+  assert.match(files.get('assets/favicon/favicon.svg').toString(), /prefers-color-scheme: dark/);
+});
