@@ -1,0 +1,18 @@
+Cube Algos branding
+Copyright 2026 Cube Algos UG (haftungsbeschränkt), An der Maar 19, 52525 Heinsberg, Germany
+
+This repository carries two licences:
+
+1. Code (design-token sources, build scripts, generator scripts, CI
+   workflows, documentation tooling) is licensed under the Apache License,
+   Version 2.0 -- see LICENSE. Contributions to code require the CLA in
+   CLA.md. Code files carry the tag "SPDX-License-Identifier: Apache-2.0".
+
+2. Brand assets are NOT covered by the Apache License. The logos, the
+   wordmark, the clownfish mascot, favicons, stings, animation
+   exports and anything else that identifies Cube Algos are copyright
+   Cube Algos UG (haftungsbeschränkt), all rights reserved, and are
+   trademarks -- see assets/LICENSE.md.
+
+The Apache-2.0 licence covers the code only. Nothing in LICENSE grants any
+right in the brand assets or in the Cube Algos name or marks.
