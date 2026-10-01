@@ -7,6 +7,7 @@ All notable changes to this repository are documented here, in the
 
 ### Added
 
+- Brand guidelines `docs/guidelines.md` (palette, type, logo, fish, motion, voice, licensing) and `npm run check:docs`, run by the `changelog-check` workflow: dead relative links, hex colours not in the tokens, a stale contrast table (#13).
 - Licence split: Apache-2.0 for code, all rights reserved for brand assets (#1).
 - Repo conventions: README, CLAUDE.md, commit-msg hook (#2).
 - DTCG source tokens (colour with light and dark themes, typography, spacing, radius, motion) in
