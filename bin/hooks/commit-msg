@@ -1,0 +1,18 @@
+#!/bin/sh
+# SPDX-License-Identifier: Apache-2.0
+# Commit-message rule for cubealgos/branding:
+#   type(scope): description (#N)
+# with a required scope and a trailing GitHub issue reference, for every commit
+# including merges and releases. Install with: git config core.hooksPath bin/hooks
+subject=$(sed -n '1p' "$1")
+types='feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert|merge|release'
+if printf '%s\n' "$subject" | grep -Eq "^($types)\([a-z0-9._/-]+\)!?: .+ \(#[0-9]+\)$"; then
+  exit 0
+fi
+cat >&2 <<MSG
+commit-msg: rejected: '$subject'
+  Expected: type(scope): description (#N)
+  type is one of: $(printf '%s' "$types" | tr '|' ' ')
+  scope is required, and (#N) is the GitHub issue the commit belongs to.
+MSG
+exit 1

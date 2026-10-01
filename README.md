@@ -1,7 +1,37 @@
 # Cube Algos branding
 
 The Cube Algos brand: design tokens, logo, mascot, motion and guidelines. This repository is being
-rebuilt (see the open issues); the remaining 2023 files are replaced as the new brand lands.
+rebuilt in place (see the open issues and milestones); the 2023 brand files still in the tree are
+replaced as the new brand lands.
+
+## Contents
+
+| Path | What |
+| --- | --- |
+| `assets/` | Brand assets (logo, wordmark, mascot, favicons, stings, animations); all rights reserved, see `assets/LICENSE.md` |
+| `bin/hooks/` | Git hooks (`commit-msg`) |
+| `full_logo/`, `icon_logo/`, `colors.json` | 2023 brand, being retired |
+| `CLAUDE.md` | Working rules for the branch, commit and PR workflow |
+| `CHANGELOG.md` | Keep a Changelog |
+
+Design tokens and guidelines arrive with the later milestones.
+
+## Build
+
+There is nothing to build yet. The build (design tokens via Style Dictionary, asset exports) is
+added in milestone M1, and its commands will be listed here.
+
+## Contributing
+
+1. Install the commit hook once per clone: `git config core.hooksPath bin/hooks`.
+2. Branch from `development` as `<family>/<N>-<slug>` (`feature` `bugfix` `chore` `documentation`
+   `release`; `hotfix` from `production`), `N` being the GitHub issue number, in its own worktree:
+   `git worktree add --relative-paths .worktrees/<N> -b <family>/<N>-<slug> origin/development`.
+3. Commit as `type(scope): description (#N)`. One issue, one branch, one pull request; plain merge
+   only.
+
+See `CONTRIBUTING.md` and `CLAUDE.md` for the full rules, and `SECURITY.md` to report a
+vulnerability.
 
 ## Licence
 
