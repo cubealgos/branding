@@ -9,16 +9,19 @@ with `git checkout legacy-2023`.
 | Path | What |
 | --- | --- |
 | `assets/` | Brand assets (logo, wordmark, mascot, favicons, stings, animations); all rights reserved, see `assets/LICENSE.md` |
+| `tokens/` | DTCG source tokens: `color`, `typography`, `spacing`, `radius`, `motion` (`*.json`, Apache-2.0; JSON cannot hold a header, so each file's root carries `$extensions["com.cubealgos.license"]`) |
+| `scripts/` | Node scripts (`validate-tokens.mjs`) |
 | `bin/hooks/` | Git hooks (`commit-msg`) |
 | `CLAUDE.md` | Working rules for the branch, commit and PR workflow |
 | `CHANGELOG.md` | Keep a Changelog |
 
-Design tokens and guidelines arrive with the later milestones.
+Guidelines arrive with a later milestone.
 
 ## Build
 
-There is nothing to build yet. The build (design tokens via Style Dictionary, asset exports) is
-added in milestone M1, and its commands will be listed here.
+Node 24 (see `.nvmrc`). `npm run check:tokens` loads every `tokens/*.json` and fails on a missing
+`$value`/`$type`, an unresolved reference, a wrong primitive hex or a semantic role that repeats a
+hex value. The Style Dictionary build is added next in milestone M1.
 
 ## Contributing
 

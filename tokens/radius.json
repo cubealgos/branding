@@ -1,0 +1,10 @@
+{
+  "$extensions": { "com.cubealgos.license": "Apache-2.0" },
+  "radius": {
+    "$type": "dimension",
+    "$description": "The brand's language is square and chamfered (corners are cut, not rounded), so the default radius is 0. Every non-zero step must justify itself in its own description.",
+    "none": { "$value": "0px", "$description": "The default. Buttons, cards, panels and inputs are square; emphasis comes from the chamfer, not from rounding." },
+    "sm": { "$value": "2px", "$description": "Justified exception: anti-aliasing softness on small inline elements such as code spans and keyboard hints, where a hard 0 corner looks jagged at 12 px. Never on buttons, cards or panels." },
+    "full": { "$value": "9999px", "$description": "Justified exception: genuinely circular shapes only (status dots, avatars). Never a pill-shaped button; the chamfer is the brand's shape." }
+  }
+}

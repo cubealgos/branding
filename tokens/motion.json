@@ -1,0 +1,142 @@
+{
+  "$extensions": {
+    "com.cubealgos.license": "Apache-2.0"
+  },
+  "motion": {
+    "$description": "Decision 22, \"Draw, then press\": lines draw, shapes fill; a press marks completion (scale 1.04 to 1.06, never a bounce); calm in between; amber marks the moment. Reduced motion shows the key frame.",
+    "duration": {
+      "$type": "duration",
+      "$description": "Durations in ms; every one carries its 24 fps and 60 fps frame counts in $extensions.com.cubealgos.frames.",
+      "instant": {
+        "$value": "100ms",
+        "$description": "Hover colour, focus ring. Default easing: ease-out.",
+        "$extensions": {
+          "com.cubealgos.frames": {
+            "fps24": 2,
+            "fps60": 6
+          }
+        }
+      },
+      "quick": {
+        "$value": "200ms",
+        "$description": "Button press, small toggles. Default easing: ease-out.",
+        "$extensions": {
+          "com.cubealgos.frames": {
+            "fps24": 5,
+            "fps60": 12
+          }
+        }
+      },
+      "base": {
+        "$value": "300ms",
+        "$description": "Cards, panels, menus. Default easing: settle.",
+        "$extensions": {
+          "com.cubealgos.frames": {
+            "fps24": 7,
+            "fps60": 18
+          }
+        }
+      },
+      "press": {
+        "$value": "120ms",
+        "$description": "The completion press (scale 1.04 to 1.06). Default easing: settle.",
+        "$extensions": {
+          "com.cubealgos.frames": {
+            "fps24": 3,
+            "fps60": 7
+          }
+        }
+      },
+      "echo": {
+        "$value": "700ms",
+        "$description": "The amber echo after a meaningful completion. Default easing: echo.",
+        "$extensions": {
+          "com.cubealgos.frames": {
+            "fps24": 17,
+            "fps60": 42
+          }
+        }
+      },
+      "draw": {
+        "$value": "900ms",
+        "$description": "Lines and outlines being drawn. Default easing: draw.",
+        "$extensions": {
+          "com.cubealgos.frames": {
+            "fps24": 22,
+            "fps60": 54
+          }
+        }
+      },
+      "wipe": {
+        "$value": "1000ms",
+        "$description": "Chamfer wipe between screens or scenes (500 ms in, 500 ms out). Default easing: draw.",
+        "$extensions": {
+          "com.cubealgos.frames": {
+            "fps24": 24,
+            "fps60": 60
+          },
+          "com.cubealgos.wipe": {
+            "inMs": 500,
+            "outMs": 500
+          }
+        }
+      },
+      "sting": {
+        "$value": "1800ms",
+        "$description": "The full logo sting.",
+        "$extensions": {
+          "com.cubealgos.frames": {
+            "fps24": 43,
+            "fps60": 108
+          }
+        }
+      }
+    },
+    "easing": {
+      "$type": "cubicBezier",
+      "draw": {
+        "$value": [
+          0.65,
+          0,
+          0.35,
+          1
+        ],
+        "$description": "Things being built: strokes and wipes. Slow start, slow finish."
+      },
+      "settle": {
+        "$value": [
+          0.2,
+          0.8,
+          0.3,
+          1
+        ],
+        "$description": "Things arriving and settling: card text, the press."
+      },
+      "echo": {
+        "$value": [
+          0.1,
+          0.6,
+          0.3,
+          1
+        ],
+        "$description": "The amber echo leaving the mark."
+      },
+      "ease-out": {
+        "$value": [
+          0.3,
+          0,
+          0.2,
+          1
+        ],
+        "$description": "Hover, focus and small UI responses."
+      }
+    },
+    "press": {
+      "scale": {
+        "$type": "number",
+        "$value": 1.05,
+        "$description": "Press scale, 1.05 by default within the allowed 1.04 to 1.06. Never a bounce (no overshoot)."
+      }
+    }
+  }
+}

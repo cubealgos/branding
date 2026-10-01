@@ -1,0 +1,53 @@
+{
+  "$extensions": { "com.cubealgos.license": "Apache-2.0" },
+  "font": {
+    "$description": "Decision 12: Onest 800 for display, Onest 400 for text, DM Mono 400 for labels and code. Both SIL OFL 1.1, no Reserved Font Name.",
+    "family": {
+      "sans": { "$type": "fontFamily", "$value": ["Onest", "system-ui", "sans-serif"], "$description": "Onest, system fallbacks. Display (800) and text (400)." },
+      "mono": { "$type": "fontFamily", "$value": ["DM Mono", "ui-monospace", "monospace"], "$description": "DM Mono, system fallbacks. Labels and code." }
+    },
+    "weight": {
+      "display": { "$type": "fontWeight", "$value": 800 },
+      "text": { "$type": "fontWeight", "$value": 400 },
+      "mono": { "$type": "fontWeight", "$value": 400 }
+    },
+    "scale": {
+      "$description": "Type scale: size in rem, unitless line height, tracking in em. Display, headings and body use the sans family; label uses mono.",
+      "display": {
+        "size": { "$type": "dimension", "$value": "3.5rem" },
+        "line-height": { "$type": "number", "$value": 1.05 },
+        "tracking": { "$type": "dimension", "$value": "-0.02em" }
+      },
+      "h1": {
+        "size": { "$type": "dimension", "$value": "2.5rem" },
+        "line-height": { "$type": "number", "$value": 1.1 },
+        "tracking": { "$type": "dimension", "$value": "-0.015em" }
+      },
+      "h2": {
+        "size": { "$type": "dimension", "$value": "1.875rem" },
+        "line-height": { "$type": "number", "$value": 1.2 },
+        "tracking": { "$type": "dimension", "$value": "-0.01em" }
+      },
+      "h3": {
+        "size": { "$type": "dimension", "$value": "1.375rem" },
+        "line-height": { "$type": "number", "$value": 1.3 },
+        "tracking": { "$type": "dimension", "$value": "-0.005em" }
+      },
+      "body": {
+        "size": { "$type": "dimension", "$value": "1rem" },
+        "line-height": { "$type": "number", "$value": 1.6 },
+        "tracking": { "$type": "dimension", "$value": "0em" }
+      },
+      "small": {
+        "size": { "$type": "dimension", "$value": "0.875rem" },
+        "line-height": { "$type": "number", "$value": 1.5 },
+        "tracking": { "$type": "dimension", "$value": "0em" }
+      },
+      "label": {
+        "size": { "$type": "dimension", "$value": "0.75rem" },
+        "line-height": { "$type": "number", "$value": 1.2 },
+        "tracking": { "$type": "dimension", "$value": "0.08em" }
+      }
+    }
+  }
+}
