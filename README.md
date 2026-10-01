@@ -12,7 +12,7 @@ with `git checkout legacy-2023`.
 | `tokens/` | DTCG source tokens: `color`, `typography`, `spacing`, `radius`, `chamfer`, `motion` (`*.json`, Apache-2.0; JSON cannot hold a header, so each file's root carries `$extensions["com.cubealgos.license"]`) |
 | `scripts/` | Node scripts (`validate-tokens.mjs`, `build.mjs`, `check-fresh.mjs`, `contrast-check.mjs`) |
 | `fonts/onest/` | Onest ExtraBold source for the outlined wordmark, with its OFL text (build input, not a brand asset) |
-| `docs/` | `guidelines.md` (the brand guidelines), `motion.md` (the logo sting: timeline, files, recipe), `mascot.md` (the clownfish: silhouette rules, poses, files), `logo.md` (logo files, clear space, misuse), `contrast.md` (generated contrast table), `licence-exceptions.toml` (recorded licence exceptions, empty) |
+| `docs/` | `releasing.md` (the release steps), `guidelines.md` (the brand guidelines), `motion.md` (the logo sting: timeline, files, recipe), `mascot.md` (the clownfish: silhouette rules, poses, files), `logo.md` (logo files, clear space, misuse), `contrast.md` (generated contrast table), `licence-exceptions.toml` (recorded licence exceptions, empty) |
 | `tool/` | CI checks: `branch-lint`, `lint-history`, `changelog-check`, `licence-check` (`.mjs`), `commit-baseline.txt` (grandfathered SHAs) |
 | `.github/` | Verification workflows (GitHub-hosted `ubuntu-24.04`, actions pinned by SHA) and the `setup` composite action |
 | `test/` | Unit tests (`npm test`) |
@@ -73,6 +73,7 @@ npm run build:logo     # regenerate assets/logo/ (SVG colourways, PNG exports, c
 npm run build:icons    # regenerate assets/favicon/ (favicon.svg/.ico, app and maskable icons, snippets)
 npm run build:fish     # the clownfish key-frame and animated SVGs and fish.css (assets/fish/); GIF/WebM: npm run render:fish (local, needs ffmpeg)
 npm run check:fish-motion # headless Chrome: no animation under prefers-reduced-motion: reduce (needs Chrome)
+npm run package        # release assets into release/ (gitignored): zips, tokens, SHA256SUMS; see docs/releasing.md
 npm run build:sting    # the animated sting SVGs and stills; videos and GIFs: npm run render:sting (local, needs ffmpeg)
 npm test               # unit tests (contrast maths, the amber rule)
 ```
