@@ -135,20 +135,26 @@ export function trackAt(name, ms) {
   return kf.at(-1);
 }
 
-function css(total, loop) {
+/** The `@keyframes` rule of one track: percentages of `total`, a closing 100% frame holding the last values. */
+function keyframes(name, total, prefix = 's-') {
   const p = (ms) => `${r((ms / total) * 100)}%`;
+  const kf = TRACKS[name];
+  const frames = kf.map((f) => {
+    const decl = Object.keys(f).filter((n) => CSS_PROP[n]).map((n) => `${CSS_PROP[n](f[n])};`);
+    if (f.e) decl.push(`animation-timing-function: ${E(f.e)};`);
+    return `${p(f.ms)} { ${decl.join(' ')} }`;
+  });
+  const last = kf.at(-1);
+  if (last.ms < total) frames.push(`100% { ${Object.keys(last).filter((n) => CSS_PROP[n]).map((n) => `${CSS_PROP[n](last[n])};`).join(' ')} }`);
+  return `@keyframes ${prefix}${name} { ${frames.join(' ')} }`;
+}
+
+function css(total, loop) {
   const dur = `${total}ms`;
   const k = [];
-  for (const [name, kf] of Object.entries(TRACKS)) {
+  for (const name of Object.keys(TRACKS)) {
     if (name === 'out' && !loop) continue;
-    const frames = kf.map((f) => {
-      const decl = Object.keys(f).filter((n) => CSS_PROP[n]).map((n) => `${CSS_PROP[n](f[n])};`);
-      if (f.e) decl.push(`animation-timing-function: ${E(f.e)};`);
-      return `${p(f.ms)} { ${decl.join(' ')} }`;
-    });
-    const last = kf.at(-1);
-    if (last.ms < total) frames.push(`100% { ${Object.keys(last).filter((n) => CSS_PROP[n]).map((n) => `${CSS_PROP[n](last[n])};`).join(' ')} }`);
-    k.push(`@keyframes s-${name} { ${frames.join(' ')} }`);
+    k.push(keyframes(name, total));
   }
   const rules = [
     `.a { animation-duration: ${dur}; animation-fill-mode: both; animation-iteration-count: ${loop ? 'infinite' : '1'}; animation-timing-function: linear; }`,
@@ -218,4 +224,61 @@ export function sourceHash() {
   // the frame renderer and the rasteriser behind it
   for (const f of ['./sting-frames.mjs', './raster.mjs']) parts.push(readFileSync(fileURLToPath(new URL(f, import.meta.url)), 'utf8'));
   return createHash('sha256').update(parts.join('\n')).digest('hex');
+}
+
+// ---- the mark-only sting (issue #34): inline-ready, theme-aware, started by a class ----
+
+/** Prefix of every class and keyframe name in the mark sting, so inlining it cannot touch the host page. */
+export const MARK_PREFIX = 'cas-';
+/** Fallback of `--color-accent-fill` (the amber primitive) when the host page does not define it. */
+export const MARK_ECHO = `var(--color-accent-fill, ${COLOURS.amber})`;
+const MARK_TRACKS = ['outline', 'fillin', 'press', 'echo'];
+const rest = (name) => Object.keys(TRACKS[name].at(-1)).filter((n) => CSS_PROP[n]).map((n) => `${CSS_PROP[n](TRACKS[name].at(-1)[n])};`).join(' ');
+
+function markCss() {
+  const c = MARK_PREFIX;
+  const total = SING_MS;
+  // Base styles ARE the last keyframe (the resting frame); the animation runs from 0% to it.
+  const rules = [
+    `.${c}mark { display: block; overflow: visible; color: inherit; }`,
+    `.${c}a { animation-duration: ${total}ms; animation-delay: var(--cas-delay, 0ms); animation-fill-mode: both; animation-iteration-count: 1; animation-timing-function: linear; animation-play-state: paused; }`,
+    `.${c}mark.is-playing .${c}a, .is-playing .${c}mark .${c}a { animation-play-state: running; }`,
+    `.${c}outline { fill: none; stroke: currentColor; stroke-width: 2.6; stroke-linejoin: miter; stroke-dasharray: 1000; ${rest('outline')} animation-name: ${c}outline; }`,
+    `.${c}fillin { fill: currentColor; fill-rule: evenodd; ${rest('fillin')} animation-name: ${c}fillin; }`,
+    `.${c}press { transform-origin: 32px 32px; ${rest('press')} animation-name: ${c}press; }`,
+    `.${c}echo { fill: none; stroke: ${MARK_ECHO}; stroke-width: 2.5; transform-origin: 32px 32px; ${rest('echo')} animation-name: ${c}echo; }`,
+    ...MARK_TRACKS.map((n) => keyframes(n, total, c)),
+    `@media (prefers-reduced-motion: reduce) { .${c}a { animation: none !important; } }`,
+  ];
+  return rules.map((l) => `    ${l}`).join('\n');
+}
+
+/**
+ * The mark-only sting as an inline-ready SVG: no background, no wordmark, no ids, every class and
+ * keyframe prefixed `cas-`. The mark is `currentColor` (ink on paper, paper on ink with the host's
+ * `color`), the echo `var(--color-accent-fill, amber)`. Plays once; animations stay paused until
+ * `.is-playing` is on the SVG or an ancestor; the base styles are the resting frame, which
+ * `prefers-reduced-motion` shows as is.
+ */
+export function markStingSvg() {
+  const c = MARK_PREFIX;
+  return (
+    `<svg xmlns="http://www.w3.org/2000/svg" class="${c}mark" viewBox="-28 -28 120 120" role="img" aria-label="Cube Algos logo">\n` +
+    `  <title>Cube Algos logo</title>\n  <style>\n${markCss()}\n  </style>\n` +
+    `  <path class="${c}a ${c}echo" d="${MARK_OUTER}"/>\n` +
+    `  <g class="${c}a ${c}press">\n` +
+    `    <path class="${c}a ${c}outline" pathLength="1000" d="${MARK_OUTER}"/>\n` +
+    `    <path class="${c}a ${c}outline" pathLength="1000" d="${MARK_INNER}"/>\n` +
+    `    <path class="${c}a ${c}fillin" d="${MARK_D}"/>\n` +
+    `  </g>\n</svg>\n`
+  );
+}
+
+/** The resting frame of the mark sting: the mark in `currentColor`, no echo. */
+export function markStillSvg() {
+  return (
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Cube Algos logo">\n` +
+    `  <title>Cube Algos logo</title>\n` +
+    `  <path fill="currentColor" fill-rule="evenodd" d="${MARK_D}"/>\n</svg>\n`
+  );
 }

@@ -21,6 +21,9 @@ horizontal size). Everything is generated: `npm run build:logo` rewrites it from
 `npm run check:fresh` fails if the committed files differ (PNGs compare by pixels). The PNGs come from the
 repository's own dependency-free rasteriser (`scripts/lib/raster.mjs`), so they are identical on every machine.
 
+The animated, inline-ready mark (`assets/sting/sting-mark.svg`, theme-aware, started by a class) is documented in
+`docs/motion.md`; use it for an inline brand moment, the full sting for video and splash.
+
 ## Clear space and minimum size
 
 ![Clear space around the horizontal lockup](../assets/logo/clear-space.svg)
