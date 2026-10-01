@@ -38,13 +38,19 @@ buttons and inputs), `--chamfer-lg` (16px, cards and panels). Set `--c` to one o
 **Focus ring:** `clip-path` clips everything outside the element's shape, including `outline`,
 `box-shadow` and `border` outside the box, so `outline` on a chamfered element is invisible
 (verified in Chrome). Put the ring on a wrapper as a `drop-shadow` filter, which follows the
-clipped silhouette on all edges and both cut corners. Use the 3px ring of the page's focus colour:
+clipped silhouette on all edges and both cut corners. Use a 3px ring in `--color-focus` (the amber-family text colour, checked at 3:1 against bg and card in both themes), 2px off the element, and switch the native outline off (verified in Chrome, both themes, on an amber button):
 
 ```css
 .chamfer-focus { display: inline-block; }
+.chamfer-focus :focus-visible { outline: none; } /* the native outline is clipped into a stray rectangle */
 .chamfer-focus:has(:focus-visible) {
-  filter: drop-shadow(3px 0 0 var(--ring)) drop-shadow(-3px 0 0 var(--ring))
-          drop-shadow(0 3px 0 var(--ring)) drop-shadow(0 -3px 0 var(--ring));
+  filter:
+    /* 2px gap in the page colour, so the ring never merges with an amber fill */
+    drop-shadow(2px 0 0 var(--color-bg)) drop-shadow(-2px 0 0 var(--color-bg))
+    drop-shadow(0 2px 0 var(--color-bg)) drop-shadow(0 -2px 0 var(--color-bg))
+    /* the 3px ring */
+    drop-shadow(3px 0 0 var(--color-focus)) drop-shadow(-3px 0 0 var(--color-focus))
+    drop-shadow(0 3px 0 var(--color-focus)) drop-shadow(0 -3px 0 var(--color-focus));
 }
 ```
 
