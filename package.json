@@ -13,7 +13,11 @@
     "check:fresh": "node scripts/check-fresh.mjs",
     "check:tokens": "node scripts/validate-tokens.mjs",
     "check:contrast": "node scripts/contrast-check.mjs",
-    "test": "node --test 'test/*.test.mjs'"
+    "test": "node --test 'test/*.test.mjs'",
+    "check:branch": "node tool/branch-lint.mjs",
+    "check:history": "node tool/lint-history.mjs",
+    "check:changelog": "node tool/changelog-check.mjs",
+    "check:licence": "node tool/licence-check.mjs"
   },
   "devDependencies": {
     "style-dictionary": "5.5.5"

@@ -15,6 +15,9 @@ All notable changes to this repository are documented here, in the
   `json/tokens.json`, `motion/motion.json`) and `npm run check:fresh` (#5).
 - WCAG 2.2 AA contrast check for both themes (`npm run check:contrast`), the declared pairs in
   `tokens/contrast-pairs.json`, the generated table `docs/contrast.md`, and unit tests (#6).
+- Verification CI on GitHub-hosted runners: `build`, `contrast`, `licence-check`, `branch-lint`,
+  `lint-history` and `changelog-check` workflows, the Node scripts behind them in `tool/`, the
+  commit baseline (the 2023 commit) and the licence exceptions file (#7).
 
 ### Removed
 
