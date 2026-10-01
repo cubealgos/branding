@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-4 -6 144 90" role="img" aria-label="Sad clownfish" class="fish fish--sad">
+  <title>Sad clownfish</title>
+  <style>
+    .fish { overflow: visible; }
+    .fish .mover, .fish .bodyg, .fish .tail, .fish .look, .fish .q, .fish .z1, .fish .z2, .fish .tear { transform-box: view-box; }
+    .fish .bodyg { transform-origin: 72px 40px; }
+    .fish .tail { transform-origin: 60px 40px; }
+    .fish--sad .bodyg { transform: rotate(9deg); }
+    @media (prefers-reduced-motion: no-preference) {
+      .fish--sad .bodyg { animation-name: fish-sad-bodyg; animation-duration: calc(var(--duration-wipe, 1000ms) * 3.6); animation-timing-function: var(--ease-draw, cubic-bezier(.65,0,.35,1)); animation-iteration-count: infinite; animation-fill-mode: both; }
+      .fish--sad .tail { animation-name: fish-sad-tail; animation-duration: calc(var(--duration-wipe, 1000ms) * 1.8); animation-timing-function: var(--ease-draw, cubic-bezier(.65,0,.35,1)); animation-iteration-count: infinite; animation-direction: alternate; animation-fill-mode: both; }
+      .fish--sad .tear { animation-name: fish-sad-tear; animation-duration: calc(var(--duration-wipe, 1000ms) * 3.6); animation-timing-function: var(--ease-draw, cubic-bezier(.65,0,.35,1)); animation-iteration-count: infinite; animation-fill-mode: both; }
+    }
+    @keyframes fish-sad-bodyg { 0% { transform: rotate(9deg) translate(0px, 0px); } 50% { transform: rotate(10deg) translate(0px, 3px); } 100% { transform: rotate(9deg) translate(0px, 0px); } }
+    @keyframes fish-sad-tail { 0% { transform: rotate(-3deg); } 100% { transform: rotate(3deg); } }
+    @keyframes fish-sad-tear { 0% { transform: translate(0px, 0px); opacity: 0; } 35% { transform: translate(0px, 0px); opacity: 0; } 45% { opacity: 1; } 90% { transform: translate(0px, 16px); opacity: 1; } 100% { transform: translate(0px, 20px); opacity: 0; } }
+  </style>
+  <defs><clipPath id="fish-clip"><path d="M54 8 H90 L110 28 V52 L90 72 H54 L36 54 V26 Z"/><path d="M60 40 L14 14 L27 40 L14 66 Z"/></clipPath></defs>
+  <g class="mover">
+    <g class="bodyg" transform="rotate(9 72 40)"><path class="tail" fill="#D9831A" d="M60 40 L14 14 L27 40 L14 66 Z"/><path class="body" fill="#D9831A" d="M54 8 H90 L110 28 V52 L90 72 H54 L36 54 V26 Z"/><rect class="band" x="60" y="8" width="12" height="64" fill="#E7CEB0" clip-path="url(#fish-clip)"/><path d="M82 37 L89 33 V44 H82 Z M95 33 L102 37 V44 H95 Z" fill="#16181D"/><rect class="tear" x="86" y="47" width="3" height="5" fill="#E7CEB0"/></g>
+  </g>
+</svg>

@@ -1,0 +1,45 @@
+{
+  "$extensions": {
+    "com.cubealgos.license": "Apache-2.0"
+  },
+  "spacing": {
+    "$type": "dimension",
+    "$description": "4 px base (1 unit = 0.25rem = 4px at the 16px root). Step names are multiples of the base unit.",
+    "1": {
+      "$value": "0.25rem",
+      "$description": "4 px"
+    },
+    "2": {
+      "$value": "0.5rem",
+      "$description": "8 px"
+    },
+    "3": {
+      "$value": "0.75rem",
+      "$description": "12 px"
+    },
+    "4": {
+      "$value": "1rem",
+      "$description": "16 px"
+    },
+    "6": {
+      "$value": "1.5rem",
+      "$description": "24 px"
+    },
+    "8": {
+      "$value": "2rem",
+      "$description": "32 px"
+    },
+    "12": {
+      "$value": "3rem",
+      "$description": "48 px"
+    },
+    "16": {
+      "$value": "4rem",
+      "$description": "64 px"
+    },
+    "24": {
+      "$value": "6rem",
+      "$description": "96 px"
+    }
+  }
+}

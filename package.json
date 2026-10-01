@@ -1,0 +1,37 @@
+{
+  "name": "@cubealgos/branding",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Cube Algos brand: DTCG design tokens and their build.",
+  "license": "Apache-2.0",
+  "type": "module",
+  "engines": {
+    "node": ">=24 <25"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "check:fresh": "node scripts/check-fresh.mjs",
+    "check:tokens": "node scripts/validate-tokens.mjs",
+    "check:contrast": "node scripts/contrast-check.mjs",
+    "test": "node --test 'test/*.test.mjs'",
+    "check:branch": "node tool/branch-lint.mjs",
+    "check:history": "node tool/lint-history.mjs",
+    "check:changelog": "node tool/changelog-check.mjs",
+    "check:docs": "node tool/docs-check.mjs",
+    "package": "node scripts/package.mjs",
+    "check:licence": "node tool/licence-check.mjs",
+    "build:assets": "node scripts/build-assets.mjs",
+    "build:logo": "node scripts/build-assets.mjs logo",
+    "build:icons": "node scripts/build-assets.mjs icons",
+    "build:sting": "node scripts/build-assets.mjs sting",
+    "build:fish": "node scripts/build-assets.mjs fish",
+    "render:sting": "node scripts/render-sting.mjs",
+    "render:fish": "node scripts/render-fish.mjs",
+    "check:fish-motion": "node scripts/check-fish-motion.mjs",
+    "check:sting-frames": "node scripts/check-sting-frames.mjs"
+  },
+  "devDependencies": {
+    "opentype.js": "2.0.0",
+    "style-dictionary": "5.5.5"
+  }
+}

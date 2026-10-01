@@ -1,0 +1,23 @@
+# Verification only: no deployment step in this file. Runs on GitHub-hosted
+# `ubuntu-24.04` only (this repo is public: a fork PR must never run code on
+# the org's own infrastructure). Toolchain: `.github/actions/setup`.
+name: changelog-check
+
+on:
+  push:
+    branches: [development, production]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  changelog-check:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: ./.github/actions/setup
+        with:
+          install: 'false'
+      - run: npm run check:changelog
+      - run: npm run check:docs

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-4 -6 144 90" role="img" aria-label="Idle clownfish" class="fish fish--idle">
+  <title>Idle clownfish</title>
+  <style>
+    .fish { overflow: visible; }
+    .fish .mover, .fish .bodyg, .fish .tail, .fish .look, .fish .q, .fish .z1, .fish .z2, .fish .tear { transform-box: view-box; }
+    .fish .bodyg { transform-origin: 72px 40px; }
+    .fish .tail { transform-origin: 60px 40px; }
+    .fish--idle .shut { opacity: 0; }
+    @media (prefers-reduced-motion: no-preference) {
+      .fish--idle .look { animation-name: fish-idle-look; animation-duration: calc(var(--duration-wipe, 1000ms) * 7); animation-timing-function: var(--ease-draw, cubic-bezier(.65,0,.35,1)); animation-iteration-count: infinite; animation-fill-mode: both; }
+      .fish--idle .open { animation-name: fish-idle-open; animation-duration: calc(var(--duration-wipe, 1000ms) * 3.5); animation-timing-function: steps(1); animation-iteration-count: infinite; animation-fill-mode: both; }
+      .fish--idle .shut { animation-name: fish-idle-shut; animation-duration: calc(var(--duration-wipe, 1000ms) * 3.5); animation-timing-function: steps(1); animation-iteration-count: infinite; animation-fill-mode: both; }
+    }
+    @keyframes fish-idle-look { 0% { transform: translate(0px, 0px); } 52% { transform: translate(0px, 0px); } 58% { transform: translate(-2.5px, 0px); } 74% { transform: translate(-2.5px, 0px); } 80% { transform: translate(0px, 0px); } 100% { transform: translate(0px, 0px); } }
+    @keyframes fish-idle-open { 0% { opacity: 1; } 92% { opacity: 1; } 94% { opacity: 0; } 97% { opacity: 1; } 100% { opacity: 1; } }
+    @keyframes fish-idle-shut { 0% { opacity: 0; } 92% { opacity: 0; } 94% { opacity: 1; } 97% { opacity: 0; } 100% { opacity: 0; } }
+  </style>
+  <defs><clipPath id="fish-clip"><path d="M54 8 H90 L110 28 V52 L90 72 H54 L36 54 V26 Z"/><path d="M60 40 L14 14 L27 40 L14 66 Z"/></clipPath></defs>
+  <g class="mover">
+    <g class="bodyg"><path class="tail" fill="#FBFBFC" d="M60 40 L14 14 L27 40 L14 66 Z"/><path class="body" fill="#FBFBFC" d="M54 8 H90 L110 28 V52 L90 72 H54 L36 54 V26 Z"/><rect class="band" x="60" y="8" width="12" height="64" fill="#E7CEB0" clip-path="url(#fish-clip)"/><g class="look"><g class="open"><rect x="82" y="28" width="7" height="16" fill="#16181D"/><rect x="95" y="28" width="7" height="16" fill="#16181D"/></g><g class="shut"><rect x="82" y="38" width="7" height="3" fill="#16181D"/><rect x="95" y="38" width="7" height="3" fill="#16181D"/></g></g></g>
+  </g>
+</svg>

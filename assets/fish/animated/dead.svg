@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-4 -6 144 90" role="img" aria-label="Dead clownfish" class="fish fish--dead">
+  <title>Dead clownfish</title>
+  <style>
+    .fish { overflow: visible; }
+    .fish .mover, .fish .bodyg, .fish .tail, .fish .look, .fish .q, .fish .z1, .fish .z2, .fish .tear { transform-box: view-box; }
+    .fish .bodyg { transform-origin: 72px 40px; }
+    .fish .tail { transform-origin: 60px 40px; }
+    .fish--dead .bodyg { transform: rotate(-14deg); }
+    @media (prefers-reduced-motion: no-preference) {
+      .fish--dead .mover { animation-name: fish-dead-mover; animation-duration: calc(var(--duration-wipe, 1000ms) * 5); animation-timing-function: var(--ease-draw, cubic-bezier(.65,0,.35,1)); animation-iteration-count: infinite; animation-fill-mode: both; }
+      .fish--dead .bodyg { animation-name: fish-dead-bodyg; animation-duration: calc(var(--duration-wipe, 1000ms) * 5); animation-timing-function: var(--ease-draw, cubic-bezier(.65,0,.35,1)); animation-iteration-count: infinite; animation-fill-mode: both; }
+    }
+    @keyframes fish-dead-mover { 0% { transform: translate(0px, 0px); } 50% { transform: translate(4px, 2px); } 100% { transform: translate(0px, 0px); } }
+    @keyframes fish-dead-bodyg { 0% { transform: rotate(-14deg); } 50% { transform: rotate(-11deg); } 100% { transform: rotate(-14deg); } }
+  </style>
+  <defs><clipPath id="fish-clip"><path d="M54 8 H90 L110 28 V52 L90 72 H54 L36 54 V26 Z"/><path d="M60 40 L14 14 L27 40 L14 66 Z"/></clipPath></defs>
+  <g class="mover">
+    <g class="bodyg" transform="rotate(-14 72 40)"><g class="flip" transform="translate(0 80) scale(1 -1)"><path class="tail" fill="#D9831A" d="M60 40 L14 14 L27 40 L14 66 Z"/><path class="body" fill="#D9831A" d="M54 8 H90 L110 28 V52 L90 72 H54 L36 54 V26 Z"/><rect class="band" x="60" y="8" width="12" height="64" fill="#E7CEB0" clip-path="url(#fish-clip)"/></g><path d="M82 43 L89 51 M89 43 L82 51 M95 43 L102 51 M102 43 L95 51" fill="none" stroke="#16181D" stroke-width="3.2" stroke-linecap="square"/></g>
+  </g>
+</svg>

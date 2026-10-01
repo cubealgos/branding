@@ -1,0 +1,1 @@
+This directory holds only the licence text of the Onest font (`OFL.txt`, SIL OFL 1.1), which governs the font, not the brand. The font itself is not a brand asset and ships with the website. All other brand assets: all rights reserved, see [`assets/LICENSE.md`](../LICENSE.md).

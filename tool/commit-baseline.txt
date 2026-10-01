@@ -1,0 +1,4 @@
+# Full SHAs of grandfathered commits that do not conform to the commit rule
+# (type(scope): description (#N)). Exempt by SHA only, never by pattern.
+# The 2023 history (tag legacy-2023) is one commit:
+ddbea473c1b58537e453929a3b11c7f07cf2d0cb

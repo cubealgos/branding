@@ -1,0 +1,59 @@
+# Release, not verification: runs only when a `vX.Y.Z` tag is pushed, never on
+# pull_request, and gates nothing (a failure is a new bug issue, not a blocked
+# merge). It deploys nothing and holds no secret beyond the default
+# GITHUB_TOKEN. GitHub-hosted `ubuntu-24.04` only. Toolchain: `.github/actions/setup`.
+
+name: release
+
+on:
+  push:
+    tags: ['v*.*.*']
+
+permissions:
+  contents: read
+
+jobs:
+  release:
+    runs-on: ubuntu-24.04
+    # Only this job writes: it creates the GitHub release.
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+      # A tag push can't be limited to a branch, so check it here: a release
+      # is only ever cut from a commit that is on production.
+      - name: Refuse a tag that is not on production
+        run: |
+          git fetch --no-tags origin production
+          if ! git merge-base --is-ancestor "$GITHUB_SHA" origin/production; then
+            echo "::error::$GITHUB_REF_NAME points at $GITHUB_SHA, which is not on production. Tag releases on production only (docs/releasing.md)."
+            exit 1
+          fi
+      - uses: ./.github/actions/setup
+        with:
+          install: 'false'
+      # Refuses a tag that does not match package.json or has no CHANGELOG
+      # section; no dependency is needed (Node's zlib and crypto only).
+      - name: Package the release assets
+        env:
+          TAG: ${{ github.ref_name }}
+        run: node scripts/package.mjs --tag "$TAG"
+      - name: Verify the checksums
+        working-directory: release
+        run: sha256sum -c SHA256SUMS
+      - name: Create the GitHub release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: ${{ github.ref_name }}
+        run: |
+          set -e
+          flags=()
+          case "$TAG" in *-*) flags+=(--prerelease) ;; esac
+          assets=(release/tokens.css release/tokens.json release/motion.json
+            "release/logo-${TAG}.zip" "release/fish-${TAG}.zip" "release/sting-${TAG}.zip"
+            release/SHA256SUMS)
+          gh release create "$TAG" "${assets[@]}" \
+            --title "$TAG" --notes-file release/release-notes.md \
+            --verify-tag "${flags[@]}"
