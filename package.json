@@ -9,6 +9,11 @@
     "node": ">=24 <25"
   },
   "scripts": {
+    "build": "node scripts/build.mjs",
+    "check:fresh": "node scripts/check-fresh.mjs",
     "check:tokens": "node scripts/validate-tokens.mjs"
+  },
+  "devDependencies": {
+    "style-dictionary": "5.5.5"
   }
 }
