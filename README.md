@@ -1,8 +1,8 @@
 # Cube Algos branding
 
 The Cube Algos brand: design tokens, logo, mascot, motion and guidelines. This repository is being
-rebuilt in place (see the open issues and milestones); the 2023 brand files still in the tree are
-replaced as the new brand lands.
+rebuilt in place (see the open issues and milestones). The 2023 brand is retired and recoverable
+with `git checkout legacy-2023`.
 
 ## Contents
 
@@ -10,7 +10,6 @@ replaced as the new brand lands.
 | --- | --- |
 | `assets/` | Brand assets (logo, wordmark, mascot, favicons, stings, animations); all rights reserved, see `assets/LICENSE.md` |
 | `bin/hooks/` | Git hooks (`commit-msg`) |
-| `full_logo/`, `icon_logo/`, `colors.json` | 2023 brand, being retired |
 | `CLAUDE.md` | Working rules for the branch, commit and PR workflow |
 | `CHANGELOG.md` | Keep a Changelog |
 

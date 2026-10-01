@@ -9,3 +9,7 @@ All notable changes to this repository are documented here, in the
 
 - Licence split: Apache-2.0 for code, all rights reserved for brand assets (#1).
 - Repo conventions: README, CLAUDE.md, commit-msg hook (#2).
+
+### Removed
+
+- The 2023 brand files, recoverable from the `legacy-2023` tag (#3).
