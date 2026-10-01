@@ -1,0 +1,10 @@
+{
+  "$extensions": { "com.cubealgos.license": "Apache-2.0" },
+  "chamfer": {
+    "$type": "dimension",
+    "$description": "Corner cut size for UI shapes. The top-right and bottom-left corners are cut (as in the mark); the other two stay square. Pattern, with --c set to one of these tokens: clip-path: polygon(0 0, calc(100% - var(--c)) 0, 100% var(--c), 100% 100%, var(--c) 100%, 0 calc(100% - var(--c))). Anchored on the motion board, where buttons use 9px and compact buttons 6px.",
+    "sm": { "$value": "6px", "$description": "Inline controls and tags up to about 32 px tall (the motion board's compact button). The cut stays under a fifth of the height so the label is never clipped." },
+    "md": { "$value": "9px", "$description": "Buttons and inputs, about 40 to 48 px tall (the motion board's main button)." },
+    "lg": { "$value": "16px", "$description": "Cards and panels, 120 px and up, where a 9 px cut would read as a rendering glitch rather than a shape." }
+  }
+}
