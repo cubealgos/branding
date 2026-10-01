@@ -11,7 +11,7 @@
       "amber": { "$value": "#D9831A", "$description": "AMBER RULE: signal amber is for fills and decoration only. 2.5:1 on paper, so never text or UI boundaries on the light ground; 6.1:1 on ink." },
       "signal-text": { "$value": "#9A5A0B", "$description": "Amber as text on paper (4.7:1)." },
       "fish-band": { "$value": "#E7CEB0", "$description": "The clownfish band: 70% paper over amber. 1.9:1 against the body, decoration only." },
-      "on-amber-white": { "$value": "#FBFBFC", "$description": "ON-AMBER RULE: on amber, white takes the accent role (decoration, the fish body), about 2.5:1 so never text. Also the light card surface." },
+      "on-amber-white": { "$value": "#FBFBFC", "$description": "ON-AMBER RULE: on amber, white takes the accent role (decoration, the fish body), about 2.8:1 so never text. Also the light card surface." },
       "card-dark": { "$value": "#23262D", "$description": "Dark theme card surface (motion board starting value, proven by the contrast check)." },
       "muted-dark": { "$value": "#9AA0AC", "$description": "Dark theme secondary text (motion board starting value, proven by the contrast check)." },
       "rule-dark": { "$value": "#2E323B", "$description": "Dark theme hairlines. Decoration." },
@@ -19,7 +19,7 @@
     },
     "accent-on-amber": {
       "$value": "{color.primitive.on-amber-white}",
-      "$description": "ON-AMBER RULE, decoration only: white takes the accent role on an amber fill (the amber echo, the fish body). About 2.5:1 on amber, so it is never text; text on amber is on-accent (ink)."
+      "$description": "ON-AMBER RULE, decoration only: white takes the accent role on an amber fill (the amber echo, the fish body). About 2.8:1 on amber, so it is never text; text on amber is on-accent (ink)."
     },
     "theme": {
       "light": {
