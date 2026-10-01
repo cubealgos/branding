@@ -10,7 +10,8 @@ with `git checkout legacy-2023`.
 | --- | --- |
 | `assets/` | Brand assets (logo, wordmark, mascot, favicons, stings, animations); all rights reserved, see `assets/LICENSE.md` |
 | `tokens/` | DTCG source tokens: `color`, `typography`, `spacing`, `radius`, `motion` (`*.json`, Apache-2.0; JSON cannot hold a header, so each file's root carries `$extensions["com.cubealgos.license"]`) |
-| `scripts/` | Node scripts (`validate-tokens.mjs`) |
+| `scripts/` | Node scripts (`validate-tokens.mjs`, `build.mjs`, `check-fresh.mjs`) |
+| `dist/` | Generated token outputs, committed: `css/tokens.css`, `json/tokens.json`, `motion/motion.json` |
 | `bin/hooks/` | Git hooks (`commit-msg`) |
 | `CLAUDE.md` | Working rules for the branch, commit and PR workflow |
 | `CHANGELOG.md` | Keep a Changelog |
@@ -19,9 +20,34 @@ Guidelines arrive with a later milestone.
 
 ## Build
 
-Node 24 (see `.nvmrc`). `npm run check:tokens` loads every `tokens/*.json` and fails on a missing
-`$value`/`$type`, an unresolved reference, a wrong primitive hex or a semantic role that repeats a
-hex value. The Style Dictionary build is added next in milestone M1.
+Node 24 (`.nvmrc`), dependencies pinned exactly with `package-lock.json` committed, install scripts
+disabled (`.npmrc`).
+
+```sh
+npm ci
+npm run build          # tokens/*.json -> dist/ with Style Dictionary
+npm run check:tokens   # validate the DTCG sources (references, primitives, descriptions)
+npm run check:fresh    # rebuild into a temp dir; fail with a diff if the committed dist/ differs
+```
+
+`dist/` is generated and committed, so consumers read it on GitHub and can pin a release. Never
+edit it by hand: change `tokens/*.json`, run `npm run build`, commit both.
+
+| Output | What |
+| --- | --- |
+| `dist/css/tokens.css` | CSS custom properties. Light is the default on `:root`; dark values are redefined under `@media (prefers-color-scheme: dark)` for `:root:not([data-theme="light"])` and under `:root[data-theme="dark"]`. Semantic colours are `--color-bg`, `--color-fg`, `--color-card`, `--color-muted`, `--color-rule`, `--color-accent-fill`, `--color-accent-text`, `--color-on-accent`; motion is `--duration-draw: 900ms`, `--ease-draw: cubic-bezier(.65,0,.35,1)`, `--press-scale` |
+| `dist/json/tokens.json` | The resolved flat token set (dotted path to `$value`, `$type`) for tools |
+| `dist/motion/motion.json` | For video tools: every duration with `ms`, `frames24`, `frames60`, every easing with `x1 y1 x2 y2` |
+
+Consuming the CSS: copy `dist/css/tokens.css` from a release tag into the site (or link it) and load
+it before your own styles, then use the properties:
+
+```css
+@import "tokens.css";
+body { background: var(--color-bg); color: var(--color-fg); font-family: var(--font-family-sans); }
+```
+
+Set `data-theme="light"` or `data-theme="dark"` on `<html>` to override the visitor's system theme.
 
 ## Contributing
 

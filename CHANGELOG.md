@@ -11,6 +11,8 @@ All notable changes to this repository are documented here, in the
 - Repo conventions: README, CLAUDE.md, commit-msg hook (#2).
 - DTCG source tokens (colour with light and dark themes, typography, spacing, radius, motion) in
   `tokens/`, and `npm run check:tokens` to validate them (#4).
+- Style Dictionary build (`npm run build`) with committed outputs in `dist/` (`css/tokens.css`,
+  `json/tokens.json`, `motion/motion.json`) and `npm run check:fresh` (#5).
 
 ### Removed
 
