@@ -9,7 +9,7 @@
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 
-export const sourceFiles = ['color', 'typography', 'spacing', 'radius', 'motion'];
+export const sourceFiles = ['color', 'typography', 'spacing', 'radius', 'chamfer', 'motion'];
 
 const ref = /^\{([^{}]+)\}$/;
 const hex = /^#[0-9A-Fa-f]{6}$/;

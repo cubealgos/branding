@@ -18,6 +18,8 @@ All notable changes to this repository are documented here, in the
 - Verification CI on GitHub-hosted runners: `build`, `contrast`, `licence-check`, `branch-lint`,
   `lint-history` and `changelog-check` workflows, the Node scripts behind them in `tool/`, the
   commit baseline (the 2023 commit) and the licence exceptions file (#7).
+- `chamfer` tokens (`sm` 6px, `md` 9px, `lg` 16px) emitted as `--chamfer-*`, with the clip-path pattern
+  and a focus-ring pattern that survives `clip-path` documented in the README (#22).
 
 ### Removed
 

@@ -53,6 +53,9 @@
   --radius-none: 0px;
   --radius-sm: 2px;
   --radius-full: 9999px;
+  --chamfer-sm: 6px;
+  --chamfer-md: 9px;
+  --chamfer-lg: 16px;
   --duration-instant: 100ms;
   --duration-quick: 200ms;
   --duration-base: 300ms;
