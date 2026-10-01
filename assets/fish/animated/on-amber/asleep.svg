@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-4 -6 144 90" role="img" aria-label="Asleep clownfish" class="fish fish--asleep">
+  <title>Asleep clownfish</title>
+  <style>
+    .fish { overflow: visible; }
+    .fish .mover, .fish .bodyg, .fish .tail, .fish .look, .fish .q, .fish .z1, .fish .z2, .fish .tear { transform-box: view-box; }
+    .fish .bodyg { transform-origin: 72px 40px; }
+    .fish .tail { transform-origin: 60px 40px; }
+    .fish--asleep .bodyg { transform: rotate(4deg); }
+    @media (prefers-reduced-motion: no-preference) {
+      .fish--asleep .mover { animation-name: fish-asleep-mover; animation-duration: calc(var(--duration-wipe, 1000ms) * 3.8); animation-timing-function: var(--ease-draw, cubic-bezier(.65,0,.35,1)); animation-iteration-count: infinite; animation-fill-mode: both; }
+      .fish--asleep .z1 { animation-name: fish-asleep-z1; animation-duration: calc(var(--duration-wipe, 1000ms) * 3.8); animation-timing-function: var(--ease-out, cubic-bezier(.3,0,.2,1)); animation-iteration-count: infinite; animation-fill-mode: both; }
+      .fish--asleep .z2 { animation-name: fish-asleep-z2; animation-duration: calc(var(--duration-wipe, 1000ms) * 3.8); animation-timing-function: var(--ease-out, cubic-bezier(.3,0,.2,1)); animation-iteration-count: infinite; animation-fill-mode: both; animation-delay: calc(var(--duration-wipe, 1000ms) * 1.2); }
+    }
+    @keyframes fish-asleep-mover { 0% { transform: translate(0px, 0px); } 50% { transform: translate(0px, 2px); } 100% { transform: translate(0px, 0px); } }
+    @keyframes fish-asleep-z1 { 0% { transform: translate(0px, 6px); opacity: 0; } 25% { opacity: 1; } 80% { transform: translate(3px, -4px); opacity: 1; } 100% { transform: translate(4px, -6px); opacity: 0; } }
+    @keyframes fish-asleep-z2 { 0% { transform: translate(0px, 6px); opacity: 0; } 25% { opacity: 1; } 80% { transform: translate(3px, -4px); opacity: 1; } 100% { transform: translate(4px, -6px); opacity: 0; } }
+  </style>
+  <defs><clipPath id="fish-clip"><path d="M54 8 H90 L110 28 V52 L90 72 H54 L36 54 V26 Z"/><path d="M60 40 L14 14 L27 40 L14 66 Z"/></clipPath></defs>
+  <g class="mover">
+    <g class="bodyg" transform="rotate(4 72 40)"><path class="tail" fill="#FBFBFC" d="M60 40 L14 14 L27 40 L14 66 Z"/><path class="body" fill="#FBFBFC" d="M54 8 H90 L110 28 V52 L90 72 H54 L36 54 V26 Z"/><rect class="band" x="60" y="8" width="12" height="64" fill="#E7CEB0" clip-path="url(#fish-clip)"/><rect x="82" y="38" width="7" height="3" fill="#16181D"/><rect x="95" y="38" width="7" height="3" fill="#16181D"/></g>
+    <path class="z1" d="M112 14 H121 V17 L116 22 H121 V25 H112 V22 L117 17 H112 Z" style="fill:var(--fish-extra,#16181D)"/><path class="z2" d="M124 0 H136 V4 L129 11 H136 V15 H124 V11 L131 4 H124 Z" style="fill:var(--fish-extra,#16181D)"/>
+  </g>
+</svg>

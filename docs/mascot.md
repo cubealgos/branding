@@ -45,3 +45,54 @@ The tear is always the band colour.
 prototype's `fishkit.py`) and `scripts/generate-fish.mjs`: `npm run build:fish` rewrites the files, colours are read from
 `dist/json/tokens.json`, and `npm run check:fresh` fails if a committed file differs. `test/fish.test.mjs` diffs the
 silhouette, tail and band across all poses and checks the stroke, colour, accessibility and viewBox rules.
+
+## Animation (decisions 13 and 22)
+
+Calm, no bounce, no overshoot: every easing is a motion token that stays inside 0..1, and the happy double hop uses
+`settle`. Durations are multiples of `--duration-wipe` (1000 ms) or `--duration-quick` (200 ms), easings are
+`--ease-draw` (the symmetric ease of sways and drifts), `--ease-settle` (the hop) and `--ease-out` (the rising `z Z`),
+each `var()` carrying the token value as its fallback so the files work without `dist/css/tokens.css`.
+
+| Pose | Motion (period) |
+| --- | --- |
+| `idle` | the eyes glance back (7 s) and blink (every 3.5 s, 3% of the cycle) |
+| `swimming` | tail wag (half cycle 0.5 s) and a drift of 8 px forward, 3 px up (3 s), for loading |
+| `happy` | `^ ^` eyes, a double hop (-9 px, then -5 px, over 2 s) and a quick tail wag (0.25 s), for sent and saved |
+| `confused` | a swaying tilt (-6 to -11 degrees, 3.2 s) and a `?` bobbing 3 px (1.6 s), for the 404 page |
+| `sad` | nose-down sink (3.6 s), a slow tail wag, a tear in the band colour falling 16 px and fading (3.6 s) |
+| `asleep` | breathing (2 px, 3.8 s) and a `z Z` rising and fading, the second 1.2 s behind the first |
+| `dead` | belly-up, `x x` eyes, a limp tilt (-14 to -11 degrees) and a 4 px drift (5 s), no water line |
+
+Every period divides the pose's export loop (`LOOP_MS` in `scripts/lib/fish-motion.mjs`: 7, 3, 2, 3.2, 3.6, 3.8 and
+5 s), so the GIF and WebM loops are seamless. The prototype board's slightly irregular periods (blink 4.4 s, swim
+drift 2.6 s, hop 1.9 s, hop wag 0.22 s) were rounded to these for that reason.
+
+**Reduced motion:** under `prefers-reduced-motion: reduce` nothing animates and every pose shows its key frame (the
+masters of `assets/fish/`). All animation rules sit inside `@media (prefers-reduced-motion: no-preference)`; the key-frame
+tilt is also set in CSS (a `transform` attribute and a CSS `transform-origin` do not mix).
+
+### Files
+
+| File | What |
+| --- | --- |
+| `assets/fish/animated/<pose>.svg`, `assets/fish/animated/on-amber/<pose>.svg` | Self-contained animated SVGs (CSS keyframes, no script, no external file) in both colour versions |
+| `assets/fish/fish.css` | The same animations as classes `.fish--<pose>` for inline SVG: inline an animated SVG (it already carries `fish fish--<pose>` and the inner classes `.mover .bodyg .tail .look .open .shut .q .z1 .z2 .tear`) and load this file instead of, or beside, its `<style>` |
+| `assets/fish/animated/social/<pose>-<paper\|ink>.gif` | 512 x 320, 25 fps, loops forever, solid background, each under 1.5 MB (the largest, `dead`, is about 0.46 MB) |
+| `assets/fish/animated/social/<pose>-<paper\|ink>.webm` | 512 x 320, 25 fps, VP9 with an alpha channel (transparent where supported); on ink the `?` and `z Z` are paper |
+| `assets/fish/animated/social/manifest.json` | ffmpeg version, a hash of everything the render depends on, a hash of every file's frames |
+
+### Recipe
+
+The keyframes live once, in `SPECS` of `scripts/lib/fish-motion.mjs`. They generate the CSS of the animated SVGs and
+`fish.css` (`npm run build:fish`, byte-checked by `npm run check:fresh`), and the same table drives the frame renderer
+(`scripts/lib/fish-frames.mjs`), which draws any frame with the repository's rasteriser (no browser; two renders give
+identical pixels; against headless Chrome playing the SVG the frames differ by anti-aliasing only).
+
+`npm run render:fish` is the **local-only** step: it draws every frame (`i / 25` s) and pipes it to ffmpeg (palettegen/
+paletteuse GIF; libvpx-vp9 `yuva420p` WebM). Commit the result with `manifest.json`. CI has no pinned ffmpeg, so
+`npm run check:fresh` checks the exports by existence, dimensions, frame count, duration, loop flag and GIF size read
+from the container headers, and fails when the manifest's source hash no longer matches the generators.
+
+`npm run check:fish-motion` (needs Chrome or Chromium; runs in the `build` workflow) loads every animated SVG and
+`fish.css` in headless Chrome with `prefers-reduced-motion` emulated: with `reduce` no element has a computed animation
+and the tilted poses keep their key-frame tilt; without it every pose is animating (so the check cannot pass vacuously).

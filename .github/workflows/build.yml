@@ -27,3 +27,4 @@ jobs:
             exit 1
           fi
       - run: npm run check:fresh
+      - run: npm run check:fish-motion

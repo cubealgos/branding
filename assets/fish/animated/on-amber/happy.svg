@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-4 -6 144 90" role="img" aria-label="Happy clownfish" class="fish fish--happy">
+  <title>Happy clownfish</title>
+  <style>
+    .fish { overflow: visible; }
+    .fish .mover, .fish .bodyg, .fish .tail, .fish .look, .fish .q, .fish .z1, .fish .z2, .fish .tear { transform-box: view-box; }
+    .fish .bodyg { transform-origin: 72px 40px; }
+    .fish .tail { transform-origin: 60px 40px; }
+    @media (prefers-reduced-motion: no-preference) {
+      .fish--happy .mover { animation-name: fish-happy-mover; animation-duration: calc(var(--duration-wipe, 1000ms) * 2); animation-timing-function: var(--ease-settle, cubic-bezier(.2,.8,.3,1)); animation-iteration-count: infinite; animation-fill-mode: both; }
+      .fish--happy .tail { animation-name: fish-happy-tail; animation-duration: calc(var(--duration-quick, 200ms) * 1.25); animation-timing-function: var(--ease-draw, cubic-bezier(.65,0,.35,1)); animation-iteration-count: infinite; animation-direction: alternate; animation-fill-mode: both; }
+    }
+    @keyframes fish-happy-mover { 0% { transform: translate(0px, 0px); } 10% { transform: translate(0px, -9px); } 20% { transform: translate(0px, 0px); } 30% { transform: translate(0px, -5px); } 40% { transform: translate(0px, 0px); } 100% { transform: translate(0px, 0px); } }
+    @keyframes fish-happy-tail { 0% { transform: rotate(-7deg); } 100% { transform: rotate(7deg); } }
+  </style>
+  <defs><clipPath id="fish-clip"><path d="M54 8 H90 L110 28 V52 L90 72 H54 L36 54 V26 Z"/><path d="M60 40 L14 14 L27 40 L14 66 Z"/></clipPath></defs>
+  <g class="mover">
+    <g class="bodyg"><path class="tail" fill="#FBFBFC" d="M60 40 L14 14 L27 40 L14 66 Z"/><path class="body" fill="#FBFBFC" d="M54 8 H90 L110 28 V52 L90 72 H54 L36 54 V26 Z"/><rect class="band" x="60" y="8" width="12" height="64" fill="#E7CEB0" clip-path="url(#fish-clip)"/><path d="M82 38 L85.5 30 L89 38 M95 38 L98.5 30 L102 38" fill="none" stroke="#16181D" stroke-width="3.4" stroke-linecap="square"/></g>
+  </g>
+</svg>
