@@ -8,7 +8,7 @@ the code only and grants no right in anything described here.
 
 ## What is covered
 
-Everything under `assets/`, and every exported logo, wordmark, mascot ("pebble"), favicon,
+Everything under `assets/`, and every exported logo, wordmark, clownfish mascot, favicon,
 sting and animation file derived from it, **wherever it is published**: in this repository, in
 release artifacts and zips, on cubealgos.de or anywhere else. No asset file carries an Apache-2.0
 header or SPDX tag; this file is the only licence statement that applies to them.
