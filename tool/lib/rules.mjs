@@ -8,12 +8,14 @@ export const longLivedBranches = ['production', 'development'];
 export const commitTypes = ['feat', 'fix', 'docs', 'style', 'refactor', 'perf', 'test', 'build', 'ci', 'chore', 'revert', 'merge', 'release'];
 
 const branchPattern = new RegExp(`^(${branchFamilies.join('|')})/[0-9]+-[a-z0-9]+(-[a-z0-9]+)*$`);
+// Release branches may carry the version as their slug: release/<N>-<X.Y.Z> (docs/releasing.md).
+const releaseBranchPattern = /^release\/[0-9]+-[0-9]+\.[0-9]+\.[0-9]+$/;
 const commitPattern = new RegExp(`^(${commitTypes.join('|')})\\([a-z0-9._/-]+\\)!?: .+ \\(#[0-9]+\\)$`);
 
 /** Error message for a non-conforming branch name, or null. */
 export function validateBranchName(branch) {
-  if (longLivedBranches.includes(branch) || branchPattern.test(branch)) return null;
-  return `Branch "${branch}" does not match <family>/<N>-<slug> (family one of ${branchFamilies.join(', ')}).`;
+  if (longLivedBranches.includes(branch) || branchPattern.test(branch) || releaseBranchPattern.test(branch)) return null;
+  return `Branch "${branch}" does not match <family>/<N>-<slug> (family one of ${branchFamilies.join(', ')}) or release/<N>-<X.Y.Z>.`;
 }
 
 /** Error message for a non-conforming commit subject, or null. */

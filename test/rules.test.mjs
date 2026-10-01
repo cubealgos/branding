@@ -5,10 +5,10 @@ import { test } from 'node:test';
 import { findOffenders, hasUnreleased, parseBaseline, validateBranchName, validateCommitSubject } from '../tool/lib/rules.mjs';
 
 test('branch names', () => {
-  for (const ok of ['development', 'production', 'feature/4-dtcg-source-tokens', 'chore/7-ci', 'hotfix/12-fix']) {
+  for (const ok of ['development', 'production', 'feature/4-dtcg-source-tokens', 'chore/7-ci', 'hotfix/12-fix', 'release/14-1.0.0', 'release/31-1.2.10']) {
     assert.equal(validateBranchName(ok), null, ok);
   }
-  for (const bad of ['main', 'feature/dtcg', 'feat/4-x', 'feature/4-Bad_Slug', 'feature/4-', 'fix/4-x']) {
+  for (const bad of ['main', 'feature/dtcg', 'feat/4-x', 'feature/4-Bad_Slug', 'feature/4-', 'fix/4-x', 'feature/14-1.0.0', 'release/14-1.0', 'release/14-v1.0.0']) {
     assert.match(validateBranchName(bad), /does not match/, bad);
   }
 });
