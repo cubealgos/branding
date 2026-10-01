@@ -1,14 +1,15 @@
 // SPDX-License-Identifier: Apache-2.0
 
 // Rebuilds into a temp dir and fails with a diff if the committed dist/
-// differs, or docs/contrast.md differs from the contrast table of the rebuilt
-// tokens. Run: `npm run check:fresh`.
+// differs, docs/contrast.md differs from the contrast table of the rebuilt
+// tokens, or a generated asset (scripts/lib/assets.mjs) differs from its generator. Run: `npm run check:fresh`.
 import { mkdtempSync, readdirSync, readFileSync, rmSync, existsSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { build } from './build.mjs';
 import { evaluate, renderMarkdown } from './contrast.mjs';
+import { compare, generators } from './lib/assets.mjs';
 
 function files(dir, base = dir) {
   if (!existsSync(dir)) return [];
@@ -38,12 +39,22 @@ try {
     console.error('check:fresh: docs/contrast.md is stale. Run `npm run build && npm run check:contrast` and commit the result.');
     process.exitCode = 1;
   }
+  // generated brand assets (logo, icons, ...) must match their generators
+  let assetCount = 0;
+  for (const [name, gen] of Object.entries(generators)) {
+    const generated = await gen();
+    assetCount += generated.size;
+    for (const problem of compare(generated)) {
+      console.error(`check:fresh: ${problem} (run \`npm run build:${name}\` and commit the result)`);
+      process.exitCode = 1;
+    }
+  }
   if (stale) {
     spawnSync('diff', ['-ru', 'dist', fresh], { stdio: 'inherit' });
     console.error('check:fresh: committed dist/ is stale. Run `npm run build` and commit the result.');
     process.exitCode = 1;
-  } else if (!contrastStale) {
-    console.log(`check:fresh: dist/ and docs/contrast.md are up to date (${a.length} dist files).`);
+  } else if (!contrastStale && !process.exitCode) {
+    console.log(`check:fresh: dist/, docs/contrast.md and ${assetCount} generated asset file(s) are up to date (${a.length} dist files).`);
   }
 } finally {
   rmSync(tmp, { recursive: true, force: true });
