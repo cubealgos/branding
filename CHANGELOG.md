@@ -5,6 +5,8 @@ All notable changes to this repository are documented here, in the
 
 ## [Unreleased]
 
+## [1.0.0] - 2026-10-01
+
 ### Added
 
 - Brand guidelines `docs/guidelines.md` (palette, type, logo, fish, motion, voice, licensing) and `npm run check:docs`, run by the `changelog-check` workflow: dead relative links, hex colours not in the tokens, a stale contrast table (#13).
@@ -41,6 +43,7 @@ All notable changes to this repository are documented here, in the
   `assets/fish/fish.css` (`.fish--<pose>`, motion tokens with fallbacks), key frames under reduced motion, looping
   512 px GIF and transparent WebM exports on paper and ink (`assets/fish/animated/social/`); `npm run render:fish`
   (local, ffmpeg), `npm run check:fish-motion` (headless Chrome) and the export header checks in `check:fresh` (#12).
+- Release packaging: `npm run package` builds `tokens.css`, `tokens.json`, `motion.json`, `logo-vX.Y.Z.zip`, `fish-vX.Y.Z.zip`, `sting-vX.Y.Z.zip` and `SHA256SUMS` reproducibly into the gitignored `release/`; the tag-triggered `release` workflow publishes them (never deploys); `docs/releasing.md` (#14).
 
 ### Removed
 
