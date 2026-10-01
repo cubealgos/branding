@@ -6,7 +6,7 @@ import { BAND, BODY, POSES, TAIL, VERSIONS, VIEWBOX, extent } from '../scripts/f
 import { generate } from '../scripts/generate-fish.mjs';
 
 const poses = Object.keys(POSES);
-const files = [...generate()].filter(([p]) => p.endsWith('.svg'));
+const files = [...generate()].filter(([p]) => p.endsWith('.svg') && !p.includes('/animated/'));
 const svgs = (version) => poses.map((p) => [p, readFileSync(`assets/fish/${VERSIONS[version].dir}${p}.svg`, 'utf8')]);
 const attr = (s, re) => s.match(re)?.[1];
 

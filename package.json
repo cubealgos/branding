@@ -24,6 +24,8 @@
     "build:sting": "node scripts/build-assets.mjs sting",
     "build:fish": "node scripts/build-assets.mjs fish",
     "render:sting": "node scripts/render-sting.mjs",
+    "render:fish": "node scripts/render-fish.mjs",
+    "check:fish-motion": "node scripts/check-fish-motion.mjs",
     "check:sting-frames": "node scripts/check-sting-frames.mjs"
   },
   "devDependencies": {

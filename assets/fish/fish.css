@@ -1,0 +1,76 @@
+/* Cube Algos clownfish animations (brand asset, all rights reserved: assets/LICENSE.md). For inline SVG: put `fish fish--<pose>` on the <svg> (the markup of assets/fish/animated/<pose>.svg).
+   Durations are multiples of --duration-wipe / --duration-quick and easings are --ease-draw / --ease-settle / --ease-out from
+   dist/css/tokens.css; each var() carries the token value as its fallback, so the file also works without the tokens.
+   Under prefers-reduced-motion: reduce nothing animates and every pose shows its key frame.
+   Extras (? and z Z) are ink; on an ink background set --fish-extra: #EDEEF1 (paper) on the svg. */
+.fish { overflow: visible; }
+.fish .mover, .fish .bodyg, .fish .tail, .fish .look, .fish .q, .fish .z1, .fish .z2, .fish .tear { transform-box: view-box; }
+.fish .bodyg { transform-origin: 72px 40px; }
+.fish .tail { transform-origin: 60px 40px; }
+
+/* idle */
+.fish--idle .shut { opacity: 0; }
+@media (prefers-reduced-motion: no-preference) {
+  .fish--idle .look { animation-name: fish-idle-look; animation-duration: calc(var(--duration-wipe, 1000ms) * 7); animation-timing-function: var(--ease-draw, cubic-bezier(.65,0,.35,1)); animation-iteration-count: infinite; animation-fill-mode: both; }
+  .fish--idle .open { animation-name: fish-idle-open; animation-duration: calc(var(--duration-wipe, 1000ms) * 3.5); animation-timing-function: steps(1); animation-iteration-count: infinite; animation-fill-mode: both; }
+  .fish--idle .shut { animation-name: fish-idle-shut; animation-duration: calc(var(--duration-wipe, 1000ms) * 3.5); animation-timing-function: steps(1); animation-iteration-count: infinite; animation-fill-mode: both; }
+}
+@keyframes fish-idle-look { 0% { transform: translate(0px, 0px); } 52% { transform: translate(0px, 0px); } 58% { transform: translate(-2.5px, 0px); } 74% { transform: translate(-2.5px, 0px); } 80% { transform: translate(0px, 0px); } 100% { transform: translate(0px, 0px); } }
+@keyframes fish-idle-open { 0% { opacity: 1; } 92% { opacity: 1; } 94% { opacity: 0; } 97% { opacity: 1; } 100% { opacity: 1; } }
+@keyframes fish-idle-shut { 0% { opacity: 0; } 92% { opacity: 0; } 94% { opacity: 1; } 97% { opacity: 0; } 100% { opacity: 0; } }
+
+/* swimming */
+@media (prefers-reduced-motion: no-preference) {
+  .fish--swimming .mover { animation-name: fish-swimming-mover; animation-duration: calc(var(--duration-wipe, 1000ms) * 3); animation-timing-function: var(--ease-draw, cubic-bezier(.65,0,.35,1)); animation-iteration-count: infinite; animation-fill-mode: both; }
+  .fish--swimming .tail { animation-name: fish-swimming-tail; animation-duration: calc(var(--duration-wipe, 1000ms) * 0.5); animation-timing-function: var(--ease-draw, cubic-bezier(.65,0,.35,1)); animation-iteration-count: infinite; animation-direction: alternate; animation-fill-mode: both; }
+}
+@keyframes fish-swimming-mover { 0% { transform: translate(0px, 0px); } 50% { transform: translate(8px, -3px); } 100% { transform: translate(0px, 0px); } }
+@keyframes fish-swimming-tail { 0% { transform: rotate(-7deg); } 100% { transform: rotate(7deg); } }
+
+/* happy */
+@media (prefers-reduced-motion: no-preference) {
+  .fish--happy .mover { animation-name: fish-happy-mover; animation-duration: calc(var(--duration-wipe, 1000ms) * 2); animation-timing-function: var(--ease-settle, cubic-bezier(.2,.8,.3,1)); animation-iteration-count: infinite; animation-fill-mode: both; }
+  .fish--happy .tail { animation-name: fish-happy-tail; animation-duration: calc(var(--duration-quick, 200ms) * 1.25); animation-timing-function: var(--ease-draw, cubic-bezier(.65,0,.35,1)); animation-iteration-count: infinite; animation-direction: alternate; animation-fill-mode: both; }
+}
+@keyframes fish-happy-mover { 0% { transform: translate(0px, 0px); } 10% { transform: translate(0px, -9px); } 20% { transform: translate(0px, 0px); } 30% { transform: translate(0px, -5px); } 40% { transform: translate(0px, 0px); } 100% { transform: translate(0px, 0px); } }
+@keyframes fish-happy-tail { 0% { transform: rotate(-7deg); } 100% { transform: rotate(7deg); } }
+
+/* confused */
+.fish--confused .bodyg { transform: rotate(-8deg); }
+@media (prefers-reduced-motion: no-preference) {
+  .fish--confused .bodyg { animation-name: fish-confused-bodyg; animation-duration: calc(var(--duration-wipe, 1000ms) * 3.2); animation-timing-function: var(--ease-draw, cubic-bezier(.65,0,.35,1)); animation-iteration-count: infinite; animation-fill-mode: both; }
+  .fish--confused .q { animation-name: fish-confused-q; animation-duration: calc(var(--duration-wipe, 1000ms) * 1.6); animation-timing-function: var(--ease-draw, cubic-bezier(.65,0,.35,1)); animation-iteration-count: infinite; animation-fill-mode: both; }
+}
+@keyframes fish-confused-bodyg { 0% { transform: rotate(-6deg); } 50% { transform: rotate(-11deg); } 100% { transform: rotate(-6deg); } }
+@keyframes fish-confused-q { 0% { transform: translate(0px, 0px); } 50% { transform: translate(0px, -3px); } 100% { transform: translate(0px, 0px); } }
+
+/* sad */
+.fish--sad .bodyg { transform: rotate(9deg); }
+@media (prefers-reduced-motion: no-preference) {
+  .fish--sad .bodyg { animation-name: fish-sad-bodyg; animation-duration: calc(var(--duration-wipe, 1000ms) * 3.6); animation-timing-function: var(--ease-draw, cubic-bezier(.65,0,.35,1)); animation-iteration-count: infinite; animation-fill-mode: both; }
+  .fish--sad .tail { animation-name: fish-sad-tail; animation-duration: calc(var(--duration-wipe, 1000ms) * 1.8); animation-timing-function: var(--ease-draw, cubic-bezier(.65,0,.35,1)); animation-iteration-count: infinite; animation-direction: alternate; animation-fill-mode: both; }
+  .fish--sad .tear { animation-name: fish-sad-tear; animation-duration: calc(var(--duration-wipe, 1000ms) * 3.6); animation-timing-function: var(--ease-draw, cubic-bezier(.65,0,.35,1)); animation-iteration-count: infinite; animation-fill-mode: both; }
+}
+@keyframes fish-sad-bodyg { 0% { transform: rotate(9deg) translate(0px, 0px); } 50% { transform: rotate(10deg) translate(0px, 3px); } 100% { transform: rotate(9deg) translate(0px, 0px); } }
+@keyframes fish-sad-tail { 0% { transform: rotate(-3deg); } 100% { transform: rotate(3deg); } }
+@keyframes fish-sad-tear { 0% { transform: translate(0px, 0px); opacity: 0; } 35% { transform: translate(0px, 0px); opacity: 0; } 45% { opacity: 1; } 90% { transform: translate(0px, 16px); opacity: 1; } 100% { transform: translate(0px, 20px); opacity: 0; } }
+
+/* asleep */
+.fish--asleep .bodyg { transform: rotate(4deg); }
+@media (prefers-reduced-motion: no-preference) {
+  .fish--asleep .mover { animation-name: fish-asleep-mover; animation-duration: calc(var(--duration-wipe, 1000ms) * 3.8); animation-timing-function: var(--ease-draw, cubic-bezier(.65,0,.35,1)); animation-iteration-count: infinite; animation-fill-mode: both; }
+  .fish--asleep .z1 { animation-name: fish-asleep-z1; animation-duration: calc(var(--duration-wipe, 1000ms) * 3.8); animation-timing-function: var(--ease-out, cubic-bezier(.3,0,.2,1)); animation-iteration-count: infinite; animation-fill-mode: both; }
+  .fish--asleep .z2 { animation-name: fish-asleep-z2; animation-duration: calc(var(--duration-wipe, 1000ms) * 3.8); animation-timing-function: var(--ease-out, cubic-bezier(.3,0,.2,1)); animation-iteration-count: infinite; animation-fill-mode: both; animation-delay: calc(var(--duration-wipe, 1000ms) * 1.2); }
+}
+@keyframes fish-asleep-mover { 0% { transform: translate(0px, 0px); } 50% { transform: translate(0px, 2px); } 100% { transform: translate(0px, 0px); } }
+@keyframes fish-asleep-z1 { 0% { transform: translate(0px, 6px); opacity: 0; } 25% { opacity: 1; } 80% { transform: translate(3px, -4px); opacity: 1; } 100% { transform: translate(4px, -6px); opacity: 0; } }
+@keyframes fish-asleep-z2 { 0% { transform: translate(0px, 6px); opacity: 0; } 25% { opacity: 1; } 80% { transform: translate(3px, -4px); opacity: 1; } 100% { transform: translate(4px, -6px); opacity: 0; } }
+
+/* dead */
+.fish--dead .bodyg { transform: rotate(-14deg); }
+@media (prefers-reduced-motion: no-preference) {
+  .fish--dead .mover { animation-name: fish-dead-mover; animation-duration: calc(var(--duration-wipe, 1000ms) * 5); animation-timing-function: var(--ease-draw, cubic-bezier(.65,0,.35,1)); animation-iteration-count: infinite; animation-fill-mode: both; }
+  .fish--dead .bodyg { animation-name: fish-dead-bodyg; animation-duration: calc(var(--duration-wipe, 1000ms) * 5); animation-timing-function: var(--ease-draw, cubic-bezier(.65,0,.35,1)); animation-iteration-count: infinite; animation-fill-mode: both; }
+}
+@keyframes fish-dead-mover { 0% { transform: translate(0px, 0px); } 50% { transform: translate(4px, 2px); } 100% { transform: translate(0px, 0px); } }
+@keyframes fish-dead-bodyg { 0% { transform: rotate(-14deg); } 50% { transform: rotate(-11deg); } 100% { transform: rotate(-14deg); } }

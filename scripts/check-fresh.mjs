@@ -11,6 +11,7 @@ import { build } from './build.mjs';
 import { evaluate, renderMarkdown } from './contrast.mjs';
 import { compare, generators } from './lib/assets.mjs';
 import { checkRendered } from './lib/sting-check.mjs';
+import { checkRendered as checkFishRendered } from './lib/fish-exports.mjs';
 
 function files(dir, base = dir) {
   if (!existsSync(dir)) return [];
@@ -50,8 +51,8 @@ try {
       process.exitCode = 1;
     }
   }
-  // rendered sting videos and GIFs (Chrome + ffmpeg, local-only): existence, size, duration, frames, source hash
-  for (const problem of checkRendered()) {
+  // rendered sting videos and GIFs and the fish GIFs and WebMs (ffmpeg, local-only): existence, size, duration, frames, source hash
+  for (const problem of [...checkRendered(), ...checkFishRendered()]) {
     console.error(`check:fresh: ${problem}`);
     process.exitCode = 1;
   }

@@ -30,7 +30,7 @@ const rect = (x, y, w, h) => ({ rect: [x, y, w, h] });
 const poly = (width, ...lines) => ({ stroke: { width, lines } });
 
 const IDLE_EYES = [rect(82, 28, 7, 16), rect(95, 28, 7, 16)];
-const CLOSED_EYES = [rect(82, 38, 7, 3), rect(95, 38, 7, 3)];
+export const CLOSED_EYES = [rect(82, 38, 7, 3), rect(95, 38, 7, 3)];
 
 // extras use absolute path data only (the repo rasteriser reads M L H V Z)
 const QMARK = { cls: 'q', d: 'M118 2 H130 V14 H124 V20 H118 V12 H124 V8 H118 Z M118 24 H124 V30 H118 Z' };
@@ -65,7 +65,7 @@ export const POSES = {
 const strokeD = (lines) => lines.map((l) => l.map(([x, y], i) => `${i ? 'L' : 'M'}${x} ${y}`).join(' ')).join(' ');
 const clipId = 'fish-clip';
 
-function eyeSvg(e, ink) {
+export function eyeSvg(e, ink) {
   if (e.rect) return `<rect x="${e.rect[0]}" y="${e.rect[1]}" width="${e.rect[2]}" height="${e.rect[3]}" fill="${ink}"/>`;
   if (e.stroke) return `<path d="${strokeD(e.stroke.lines)}" fill="none" stroke="${ink}" stroke-width="${e.stroke.width}" stroke-linecap="square"/>`;
   return `<path d="${e.d}" fill="${ink}"/>`;
@@ -79,7 +79,7 @@ function extraSvg(x, v) {
 
 /**
  * The key-frame SVG of one pose in one colour version. `animation` (used by the animated
- * exports) may supply { css, eyes } to add a style block and replace the eyes markup.
+ * exports) may supply { css, blink } to add a style block and the idle eyes' glance and blink groups.
  */
 export function poseSvg(pose, version, animation = {}) {
   const p = POSES[pose];
@@ -89,7 +89,9 @@ export function poseSvg(pose, version, animation = {}) {
     `<path class="tail" fill="${v.body}" d="${TAIL}"/>` +
     `<path class="body" fill="${v.body}" d="${BODY}"/>` +
     `<rect class="band" x="${BAND.x}" y="${BAND.y}" width="${BAND.width}" height="${BAND.height}" fill="${v.band}" clip-path="url(#${clipId})"/>`;
-  const eyes = animation.eyes ?? p.eyes.map((e) => eyeSvg(e, v.ink)).join('');
+  const open = p.eyes.map((e) => eyeSvg(e, v.ink)).join('');
+  // the animated idle fish glances (`look`) and blinks (`open` swaps for `shut`)
+  const eyes = animation.blink ? `<g class="look"><g class="open">${open}</g><g class="shut">${CLOSED_EYES.map((e) => eyeSvg(e, v.ink)).join('')}</g></g>` : open;
   const inBody = (p.extras ?? []).filter((x) => x.inBody).map((x) => extraSvg(x, v)).join('');
   const outside = (p.extras ?? []).filter((x) => !x.inBody).map((x) => extraSvg(x, v)).join('');
   const body = p.flip ? `<g class="flip" transform="translate(0 ${2 * ORIGIN[1]}) scale(1 -1)">${shape}</g>${eyes}` : `${shape}${eyes}${inBody}`;
