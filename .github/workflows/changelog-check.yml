@@ -20,3 +20,4 @@ jobs:
         with:
           install: 'false'
       - run: npm run check:changelog
+      - run: npm run check:docs

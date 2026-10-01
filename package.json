@@ -17,6 +17,7 @@
     "check:branch": "node tool/branch-lint.mjs",
     "check:history": "node tool/lint-history.mjs",
     "check:changelog": "node tool/changelog-check.mjs",
+    "check:docs": "node tool/docs-check.mjs",
     "check:licence": "node tool/licence-check.mjs",
     "build:assets": "node scripts/build-assets.mjs",
     "build:logo": "node scripts/build-assets.mjs logo",

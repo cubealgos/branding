@@ -12,7 +12,7 @@ with `git checkout legacy-2023`.
 | `tokens/` | DTCG source tokens: `color`, `typography`, `spacing`, `radius`, `chamfer`, `motion` (`*.json`, Apache-2.0; JSON cannot hold a header, so each file's root carries `$extensions["com.cubealgos.license"]`) |
 | `scripts/` | Node scripts (`validate-tokens.mjs`, `build.mjs`, `check-fresh.mjs`, `contrast-check.mjs`) |
 | `fonts/onest/` | Onest ExtraBold source for the outlined wordmark, with its OFL text (build input, not a brand asset) |
-| `docs/` | `motion.md` (the logo sting: timeline, files, recipe), `mascot.md` (the clownfish: silhouette rules, poses, files), `logo.md` (logo files, clear space, misuse), `contrast.md` (generated contrast table), `licence-exceptions.toml` (recorded licence exceptions, empty) |
+| `docs/` | `guidelines.md` (the brand guidelines), `motion.md` (the logo sting: timeline, files, recipe), `mascot.md` (the clownfish: silhouette rules, poses, files), `logo.md` (logo files, clear space, misuse), `contrast.md` (generated contrast table), `licence-exceptions.toml` (recorded licence exceptions, empty) |
 | `tool/` | CI checks: `branch-lint`, `lint-history`, `changelog-check`, `licence-check` (`.mjs`), `commit-baseline.txt` (grandfathered SHAs) |
 | `.github/` | Verification workflows (GitHub-hosted `ubuntu-24.04`, actions pinned by SHA) and the `setup` composite action |
 | `test/` | Unit tests (`npm test`) |
@@ -21,7 +21,7 @@ with `git checkout legacy-2023`.
 | `CLAUDE.md` | Working rules for the branch, commit and PR workflow |
 | `CHANGELOG.md` | Keep a Changelog |
 
-Guidelines arrive with a later milestone.
+The brand guidelines are in [`docs/guidelines.md`](docs/guidelines.md).
 
 ## Chamfer
 
@@ -116,7 +116,7 @@ on GitHub-hosted runners only; verification only, nothing deploys. Run each loca
 | `licence-check` | `npm run check:licence` | a lockfile package (production or dev) on the deny list, not on the allow list, unknown, or MPL-2.0 without a recorded exception in `docs/licence-exceptions.toml`; exceptions are printed every run |
 | `branch-lint` | `npm run check:branch [-- <branch>]` | a branch not named `<family>/<N>-<slug>` |
 | `lint-history` | `npm run check:history` | a commit subject not `type(scope): description (#N)`, unless its full SHA is in `tool/commit-baseline.txt` (the 2023 commit only) |
-| `changelog-check` | `npm run check:changelog` | a `CHANGELOG.md` without an `Unreleased` section |
+| `changelog-check` | `npm run check:changelog`, `npm run check:docs` | a `CHANGELOG.md` without an `Unreleased` section; a dead relative link in the README or `docs/`, a hex colour not in `tokens/*.json`, or a stale contrast table in the guidelines |
 
 The licence policy mirrors `standards/legal/dependency-license-policy.md` of the org's standards: it
 allows MIT, Apache-2.0 (also WITH LLVM-exception), BSD-2/3-Clause, Unicode-3.0, Unlicense, CC0-1.0,
