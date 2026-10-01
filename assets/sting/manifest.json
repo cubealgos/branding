@@ -1,0 +1,18 @@
+{
+  "sourceHash": "ad74476c0df71a0ae9efee771c82e0d3f6cfdb96715664a05141bb97dd5222a7",
+  "ffmpeg": "ffmpeg version 9.0.1",
+  "frameHashes": {
+    "paper-16x9": "89a5001a1d16f14cbed70aeaa1c42c60e3878ee1f4a07ce187bfe13c97c5d71f",
+    "paper-9x16": "50dd3a5274a222ac04dd36b16b232bfa08698bd20ad07c9175d5bbab42ba1e33",
+    "paper-1x1": "21668ebc2d584361b1b28fa8ca3160e407e6fb81415926fd6f19b82aa612037b",
+    "paper-gif": "71fdbe7fca01c2b056bfd7bd16f717ab5cbdc56be458c26f48e76587eabd2877",
+    "ink-16x9": "72a96a4ea29b85799e24c5152ce57dd0c42dee1ea57f1e584452b8d5540378df",
+    "ink-9x16": "f7c0235b14b3a3ee73c8348677fac012a3fb7cab21dfb50b6563ecab8eb04d8a",
+    "ink-1x1": "01200e3fc40de7e64b4dcd545d3cb14f355b0c6e33162df3e2a781c940ba5ff1",
+    "ink-gif": "77fa12d4f6c72dcf56f5c51fa625956aa3dc0a4831ee6359ac6fe097e092f2de",
+    "amber-16x9": "40e061949acf29c9c504095464d633c01e022e5f42d0d0fa4ca99e32aa2c67fd",
+    "amber-9x16": "5059613921b81c7567bb16218db8af62e04db299f289aec8673ca3033c91b7f9",
+    "amber-1x1": "f2a5b5e11d8f9d19c8330c92aca96b685d33c8c0622dd584c38be847287caaf7",
+    "amber-gif": "b43703e39eb6e99efa593c486749116a24df83b852e23cff5dcaacd1ace504f8"
+  }
+}

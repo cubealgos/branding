@@ -10,6 +10,7 @@ import { join } from 'node:path';
 import { build } from './build.mjs';
 import { evaluate, renderMarkdown } from './contrast.mjs';
 import { compare, generators } from './lib/assets.mjs';
+import { checkRendered } from './lib/sting-check.mjs';
 
 function files(dir, base = dir) {
   if (!existsSync(dir)) return [];
@@ -48,6 +49,11 @@ try {
       console.error(`check:fresh: ${problem} (run \`npm run build:${name}\` and commit the result)`);
       process.exitCode = 1;
     }
+  }
+  // rendered sting videos and GIFs (Chrome + ffmpeg, local-only): existence, size, duration, frames, source hash
+  for (const problem of checkRendered()) {
+    console.error(`check:fresh: ${problem}`);
+    process.exitCode = 1;
   }
   if (stale) {
     spawnSync('diff', ['-ru', 'dist', fresh], { stdio: 'inherit' });
