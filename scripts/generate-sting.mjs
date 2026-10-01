@@ -5,7 +5,7 @@
 // and WebM files come from `npm run render:sting` (Chrome + ffmpeg).
 import { artwork, hex } from './lib/logo.mjs';
 import { encodePng, render } from './lib/raster.mjs';
-import { BACKGROUNDS, stage, stillSvg, stingSvg } from './lib/sting.mjs';
+import { BACKGROUNDS, markStillSvg, markStingSvg, stage, stillSvg, stingSvg } from './lib/sting.mjs';
 
 const STILL_PX = 1280;
 
@@ -30,6 +30,8 @@ export function generate() {
     out.set(`assets/sting/sting-${bg}-still.svg`, Buffer.from(stillSvg(bg)));
     out.set(`assets/sting/sting-${bg}-still.png`, stillPng(bg));
   }
+  out.set('assets/sting/sting-mark.svg', Buffer.from(markStingSvg()));
+  out.set('assets/sting/sting-mark-still.svg', Buffer.from(markStillSvg()));
   out.set('assets/sting/LICENSE.md', Buffer.from('Licence: all rights reserved, see [`assets/LICENSE.md`](../LICENSE.md).\n'));
   return out;
 }

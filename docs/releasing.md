@@ -34,7 +34,7 @@ from that CHANGELOG section (a tag with a `-suffix` is marked a pre-release).
 | `tokens.css`, `tokens.json`, `motion.json` | `dist/css/tokens.css`, `dist/json/tokens.json`, `dist/motion/motion.json` |
 | `logo-vX.Y.Z.zip` | Mark, wordmark, lockups and colourways (SVG and PNG), the favicon set, `LICENSE.md` |
 | `fish-vX.Y.Z.zip` | Static and animated SVGs in both colour versions, `fish.css`, GIF and WebM, `LICENSE.md` |
-| `sting-vX.Y.Z.zip` | Animated SVG, GIF, MP4, WebM and stills for paper, ink and amber, `LICENSE.md` |
+| `sting-vX.Y.Z.zip` | Animated SVG, GIF, MP4, WebM and stills for paper, ink and amber, the mark-only inline sting (`sting-mark.svg`, `sting-mark-still.svg`), `LICENSE.md` |
 | `SHA256SUMS` | SHA-256 of every asset above: `<hash>  <file>` |
 
 Every zip unpacks into its own folder (`logo-vX.Y.Z/`), carries `LICENSE.md` (the brand asset licence,

@@ -5,6 +5,12 @@ All notable changes to this repository are documented here, in the
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-10-02
+
+### Added
+
+- Mark-only, theme-aware logo sting for inline use: `assets/sting/sting-mark.svg` (the chamfer mark, `currentColor`, echo `var(--color-accent-fill, #D9831A)`, 1800 ms once, generated from the same keyframe tracks as the full sting, `cas-` prefixed so it can be inlined safely, paused until `.is-playing`, still frame under reduced motion) and `sting-mark-still.svg`; both ship in `sting-vX.Y.Z.zip`; documented in `docs/motion.md` (#34).
+
 ## [1.0.0] - 2026-10-01
 
 ### Added

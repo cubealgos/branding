@@ -30,6 +30,33 @@ For each background `paper`, `ink`, `amber`:
 | `sting-<bg>.gif` | 800x450, 80 frames at 25 fps, loops forever, loop length 3.2 s, palette-optimised (about 80 KB) |
 | `sting-<bg>-<16x9\|9x16\|1x1>.mp4`, `.webm` | 1920x1080, 1080x1920, 1080x1080 at 24 fps, H.264 (yuv420p, BT.709) and VP9; the lockup is 50% (16:9) or 60% (9:16, 1:1) of the frame width, so every frame keeps at least 10% margin, echo included |
 
+The **mark-only sting** (no wordmark, no background, no colourways) is for inline brand moments:
+
+| File | What |
+| --- | --- |
+| `sting-mark.svg` | Inline-ready animated SVG of the chamfer mark: outline draws 0 to 0.9 s, fill 0.85 to 1.1 s, one echo scaling 1 to 1.75 and fading while the mark presses to 1.06 from 1.06 s; 1800 ms, plays once. Generated from the same `TRACKS` as the full sting |
+| `sting-mark-still.svg` | The resting frame (the mark in `currentColor`), for docs and as the `prefers-reduced-motion` look |
+
+Inline it (paste the SVG into the page): it is then **theme-aware**, because the mark is `currentColor` (set `color`
+on the SVG or an ancestor: ink on paper, paper on ink) and the echo is `var(--color-accent-fill, #D9831A)`. As
+`<img>` it cannot read the page's theme, so the mark is black and the echo the amber fallback: use inline for
+anything that must follow light and dark. Every class and keyframe is prefixed `cas-` and the SVG has no ids, so it
+cannot leak into the host page (give it a width; it is `display: block`).
+
+**Start control:** every animation is paused (the mark is not yet drawn) until `.is-playing` is on the SVG or an
+ancestor; add the class when the mark scrolls into view. `--cas-delay` (default `0ms`) delays the start.
+
+```js
+const io = new IntersectionObserver(([e]) => e.isIntersecting && (e.target.classList.add('is-playing'), io.disconnect()));
+io.observe(document.querySelector('.cas-mark')); // plays once, then holds the resting frame
+```
+
+The base styles are the last keyframe, so the resting frame is what a page without the class would get if the
+animation were removed; under `prefers-reduced-motion: reduce` animations are off and the still mark shows.
+
+Use the mark-only sting for an inline brand moment next to a heading or card; use the full sting (wordmark, colourways,
+GIF, video) for video, splash screens and anywhere the logo stands alone.
+
 `manifest.json` records the ffmpeg version of the last render, a hash of everything the render depends on
 (the SVG generator, the frame renderer and the rasteriser) and a hash of every video's pixels.
 
