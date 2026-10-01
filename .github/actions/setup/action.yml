@@ -1,0 +1,15 @@
+name: setup
+description: Node (major pinned in .nvmrc) and, unless disabled, `npm ci`.
+inputs:
+  install:
+    description: Run `npm ci` (false for checks with no dependencies).
+    default: 'true'
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+      with:
+        node-version-file: .nvmrc
+    - if: inputs.install == 'true'
+      shell: bash
+      run: npm ci

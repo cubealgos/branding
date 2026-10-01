@@ -1,0 +1,11 @@
+# Per-package licence exceptions for tool/licence-check.mjs. Printed in full on
+# every run. An entry is keyed on package AND licence, so a relicense stops it
+# matching. Only MPL-2.0 can be excepted; GPL, AGPL, LGPL, SSPL and BUSL are
+# denied outright. Policy: standards/legal/dependency-license-policy.md in the
+# cubealgos heimathafen. Empty at the start.
+#
+# [[exceptions]]
+# package = "some-package"
+# licence = "MPL-2.0"
+# scope = "dev"
+# reason = "Why this is safe."

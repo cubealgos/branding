@@ -11,7 +11,9 @@ with `git checkout legacy-2023`.
 | `assets/` | Brand assets (logo, wordmark, mascot, favicons, stings, animations); all rights reserved, see `assets/LICENSE.md` |
 | `tokens/` | DTCG source tokens: `color`, `typography`, `spacing`, `radius`, `motion` (`*.json`, Apache-2.0; JSON cannot hold a header, so each file's root carries `$extensions["com.cubealgos.license"]`) |
 | `scripts/` | Node scripts (`validate-tokens.mjs`, `build.mjs`, `check-fresh.mjs`, `contrast-check.mjs`) |
-| `docs/` | `contrast.md`, the generated contrast table of the declared role pairs |
+| `docs/` | `contrast.md` (generated contrast table), `licence-exceptions.toml` (recorded licence exceptions, empty) |
+| `tool/` | CI checks: `branch-lint`, `lint-history`, `changelog-check`, `licence-check` (`.mjs`), `commit-baseline.txt` (grandfathered SHAs) |
+| `.github/` | Verification workflows (GitHub-hosted `ubuntu-24.04`, actions pinned by SHA) and the `setup` composite action |
 | `test/` | Unit tests (`npm test`) |
 | `dist/` | Generated token outputs, committed: `css/tokens.css`, `json/tokens.json`, `motion/motion.json` |
 | `bin/hooks/` | Git hooks (`commit-msg`) |
@@ -60,6 +62,25 @@ with a `kind`: `text` (4.5:1), `large-text` and `boundary` (3:1) or `decoration`
 the exemption is visible). `npm run check:contrast` evaluates them in the light and dark themes against
 `dist/json/tokens.json`, prints the table and exits 1 on any failure. The amber rule is enforced: a
 `text` or `boundary` pair with `accent-fill` (amber) on paper always fails. Results: `docs/contrast.md`.
+
+## Checks
+
+CI runs one workflow per check on every push to `development`/`production` and every pull request,
+on GitHub-hosted runners only; verification only, nothing deploys. Run each locally (after `npm ci`):
+
+| Workflow | Locally | What it fails on |
+| --- | --- | --- |
+| `build` | `npm run build && git status --short dist` and `npm run check:fresh` | a stale committed `dist/` or `docs/contrast.md` |
+| `contrast` | `npm run check:contrast`, `npm test` | a role pair under its WCAG 2.2 AA threshold; amber text or boundary on paper |
+| `licence-check` | `npm run check:licence` | a lockfile package (production or dev) on the deny list, not on the allow list, unknown, or MPL-2.0 without a recorded exception in `docs/licence-exceptions.toml`; exceptions are printed every run |
+| `branch-lint` | `npm run check:branch [-- <branch>]` | a branch not named `<family>/<N>-<slug>` |
+| `lint-history` | `npm run check:history` | a commit subject not `type(scope): description (#N)`, unless its full SHA is in `tool/commit-baseline.txt` (the 2023 commit only) |
+| `changelog-check` | `npm run check:changelog` | a `CHANGELOG.md` without an `Unreleased` section |
+
+The licence policy mirrors `standards/legal/dependency-license-policy.md` of the org's standards: it
+allows MIT, Apache-2.0 (also WITH LLVM-exception), BSD-2/3-Clause, Unicode-3.0, Unlicense, CC0-1.0,
+Zlib, ISC, PSF-2.0 (`Python-2.0` is read as PSF-2.0), BlueOak-1.0.0, MIT-0 and 0BSD, and denies GPL,
+AGPL, LGPL, SSPL and BUSL.
 
 ## Contributing
 
