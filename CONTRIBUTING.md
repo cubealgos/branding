@@ -13,9 +13,7 @@ assets are all rights reserved. See the README's "Licence" section and `NOTICE`.
 
 ## Brand-asset contributions
 
-Logos, the wordmark, the mascot, favicons, stings and animations are owned by Cube Algos UG
-(haftungsbeschränkt) and are not open for outside reuse (`assets/LICENSE.md`). A contribution to
-an asset is accepted **only as a gift of the rights to Cube Algos UG (haftungsbeschränkt)**: you
-transfer all rights in it to the company, and it then falls under `assets/LICENSE.md`, not
-Apache-2.0. The CLA does not cover this; agree it in writing with hello@cubealgos.de before
-sending the work. Asset files never carry an Apache-2.0 header or SPDX tag.
+Everything under `assets/` is owned by Cube Algos UG (haftungsbeschränkt) and is not open for
+outside reuse (`assets/LICENSE.md`). Contributions to brand assets are accepted only under a
+separate written agreement made before the work is sent; ask at hello@cubealgos.de. The CLA does
+not cover asset contributions. Asset files never carry an Apache-2.0 header or SPDX tag.

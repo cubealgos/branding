@@ -7,8 +7,8 @@ This agreement clarifies the intellectual-property licence granted with Contribu
 person or entity. It protects you as a contributor as well as the Maintainer and the Project's
 users. It does not change your rights to use your own Contributions for any other purpose.
 
-It applies to **code** contributions. Contributions to brand assets are accepted only as a gift of
-rights, see `CONTRIBUTING.md` and `assets/LICENSE.md`.
+It applies to **code** contributions. Contributions to brand assets are not covered by this
+agreement; see `CONTRIBUTING.md`.
 
 By submitting a Contribution to the Project you accept and agree to the following terms for your
 present and future Contributions.

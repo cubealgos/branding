@@ -5,6 +5,10 @@ All notable changes to this repository are documented here, in the
 
 ## [Unreleased]
 
+### Changed
+
+- `CLA.md` and `CONTRIBUTING.md`: brand-asset contributions are now stated as not covered by the CLA and accepted only under a separate written agreement, replacing the "gift of rights" wording, which is not a legal term (UrhG §29(1): copyright cannot be transferred) (#39).
+
 ## [1.1.0] - 2026-10-02
 
 ### Added
